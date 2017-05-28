@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_91" class="java.beans.XMLDecoder">
+ <object class="java.util.HashMap">
+  <void method="put">
+   <string>4589ASD</string>
+   <object class="talleruned.vehiculos.VehiculoCuatroRuedas">
+    <void property="ABS">
+     <boolean>false</boolean>
+    </void>
+    <void property="GPS">
+     <boolean>false</boolean>
+    </void>
+    <void property="airbag">
+     <boolean>false</boolean>
+    </void>
+    <void property="almacenamiento">
+     <float>365.0</float>
+    </void>
+    <void property="caballos">
+     <float>125.0</float>
+    </void>
+    <void property="cilindrada">
+     <float>541.0</float>
+    </void>
+    <void property="combustible">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.TipoCombustible</class>
+      <string>HIBRIDO</string>
+     </object>
+    </void>
+    <void property="dni">
+     <string>1111</string>
+    </void>
+    <void property="marca">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.MarcaVehiculo</class>
+      <string>BMV</string>
+     </object>
+    </void>
+    <void property="matricula">
+     <string>4589ASD</string>
+    </void>
+    <void property="modelo">
+     <string></string>
+    </void>
+    <void property="publico">
+     <boolean>false</boolean>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
