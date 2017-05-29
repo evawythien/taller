@@ -19,7 +19,7 @@ public class Gestora {
     private HashMap<String, Vehiculo> vehiculos;
     private HashMap<Integer, FichaReparacion> fichas;
     private HashMap<String, Empleado> empleados;
-    private HashMap<Integer, Promocion> promocion;
+    private HashMap<Integer, Promocion> promociones;
     private HashMap<Integer, Mensaje> mensajes;
     private HashMap<Integer, Tarea> tareas;
     private int idUltimaFicha;
@@ -30,7 +30,7 @@ public class Gestora {
         this.vehiculos = new HashMap<>();
         this.fichas = new HashMap<>();
         this.empleados = new HashMap<>();
-        this.promocion = new HashMap<>();
+        this.promociones = new HashMap<>();
         this.tareas = new HashMap<>();
         this.mensajes = new HashMap<>();
         this.empleados.put("1234", new Empleado("mecanico", "Paco", "Garcia", "Garcia", "1234", "Calle de abajo", 983666555, 633552244, Utilidades.getFecha(12, 12, 1960)));
@@ -46,12 +46,12 @@ public class Gestora {
         this.tareas.put(8, new Tarea(8, "Reparaciones adicionales", 0.f));
         this.tareas.put(9, new Tarea(9, "Puesta a punto", 150.f));
         this.tareas.put(10, new Tarea(10, "Cambio neumaticos", 500.f));
-        this.promocion.put(1, new Promocion(1, 9, "Puesta a punto periodo Semana Santa", Utilidades.getFecha(1, 4, 2017), Utilidades.getFecha(30, 4, 2017), 100.f));
-        this.promocion.put(2, new Promocion(2, 9, "Puesta a punto periodo Verano", Utilidades.getFecha(1, 2, 2017), Utilidades.getFecha(30, 9, 2017), 90.f));
-        this.promocion.put(3, new Promocion(3, 9, "Puesta a punto periodo Navidad", Utilidades.getFecha(1, 12, 2017), Utilidades.getFecha(5, 1, 2018), 110.f));
-        this.promocion.put(4, new Promocion(4, 10, "Promoción cambio de neumaticos", Utilidades.getFecha(1, 2, 2017), Utilidades.getFecha(31, 3, 2017), 400.f));
-        this.promocion.put(5, new Promocion(5, 1, "Promoción cambio de filtro", Utilidades.getFecha(1, 10, 2017), Utilidades.getFecha(31, 10, 2017), 150.f));
-        this.promocion.put(6, new Promocion(6, 4, "Promoción cambio de aceite", Utilidades.getFecha(1, 11, 2017), Utilidades.getFecha(30, 11, 2017), 20.f));
+        this.promociones.put(1, new Promocion(1, 9, "Puesta a punto periodo Semana Santa", Utilidades.getFecha(1, 4, 2017), Utilidades.getFecha(30, 4, 2017), 100.f));
+        this.promociones.put(2, new Promocion(2, 9, "Puesta a punto periodo Verano", Utilidades.getFecha(1, 2, 2017), Utilidades.getFecha(30, 9, 2017), 90.f));
+        this.promociones.put(3, new Promocion(3, 9, "Puesta a punto periodo Navidad", Utilidades.getFecha(1, 12, 2017), Utilidades.getFecha(5, 1, 2018), 110.f));
+        this.promociones.put(4, new Promocion(4, 10, "Promoción cambio de neumaticos", Utilidades.getFecha(1, 2, 2017), Utilidades.getFecha(31, 3, 2017), 400.f));
+        this.promociones.put(5, new Promocion(5, 1, "Promoción cambio de filtro", Utilidades.getFecha(1, 10, 2017), Utilidades.getFecha(31, 10, 2017), 150.f));
+        this.promociones.put(6, new Promocion(6, 4, "Promoción cambio de aceite", Utilidades.getFecha(1, 11, 2017), Utilidades.getFecha(30, 11, 2017), 20.f));
         this.mensajes.put(1, new Mensaje(1, 1, "¿Le gustaría aceptar a la promoción actual de 'Puesta a punto periodo Semana Santa'?"));
         this.mensajes.put(2, new Mensaje(2, 2, "¿Le gustaría aceptar a la promoción actual de 'Puesta a punto periodo Verano'?"));
         this.mensajes.put(3, new Mensaje(3, 3, "¿Le gustaría aceptar a la promoción actual de 'Puesta a punto periodo Navidad'?"));
@@ -137,6 +137,17 @@ public class Gestora {
         StringBuilder sb = new StringBuilder();
         for (FichaReparacion c : fichas.values()) {
             sb.append(c).append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
+    // Muestra las promociones que estan activas en la fecha actual
+    public String listadoPromocionesActivas() {
+        StringBuilder sb = new StringBuilder();
+        for (Promocion c : promociones.values()) {
+            if (Utilidades.isBetweenDates(c.getFechaInicio(), c.getFechaFin())) {
+                sb.append(c).append(System.lineSeparator());
+            }
         }
         return sb.toString();
     }

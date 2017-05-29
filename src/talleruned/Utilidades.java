@@ -3,7 +3,6 @@ package talleruned;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,4 +41,7 @@ public class Utilidades {
         return fechaInicio.after(getFechaActual()) && fechaFin.before(getFechaActual());
     }
 
+    public static String booleanToString(Boolean b) {
+        return b ? "Si" : "No";
+    }
 }

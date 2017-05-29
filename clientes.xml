@@ -2,6 +2,41 @@
 <java version="1.8.0_91" class="java.beans.XMLDecoder">
  <object class="java.util.HashMap">
   <void method="put">
+   <string>55555F</string>
+   <object class="talleruned.usuarios.Cliente">
+    <void property="apellido">
+     <string>Dvena</string>
+    </void>
+    <void property="apellidoDos">
+     <string>Garcia</string>
+    </void>
+    <void property="direccion">
+     <string>Calle nueva</string>
+    </void>
+    <void property="dni">
+     <string>55555F</string>
+    </void>
+    <void property="fechaNacimiento">
+     <object class="java.util.GregorianCalendar">
+      <void property="time">
+       <object class="java.util.Date">
+        <long>729298800000</long>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="nombre">
+     <string>Eva</string>
+    </void>
+    <void property="tlfFijo">
+     <int>983552211</int>
+    </void>
+    <void property="tlfMovil">
+     <int>666999888</int>
+    </void>
+   </object>
+  </void>
+  <void method="put">
    <string>1111</string>
    <object class="talleruned.usuarios.Cliente">
     <void property="apellido">
