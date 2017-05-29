@@ -240,6 +240,23 @@ public class TallerUned {
             }
         } while (!ValidacionDatos.comprobarMatricula(matricula));
 
+        Boolean profesional = false;
+        TipoVehiculoProfesional tipoVehiculoPro = TipoVehiculoProfesional.OTRO;
+
+        if (numeroRuedas == 4) {
+            System.out.println("¿Pertenece a un servicio publico? - Responde Si o No");
+            profesional = lector.nextLine().equalsIgnoreCase("SI");
+
+            if (profesional) {
+                System.out.println("¿De que tipo es? - Seleccione un número");
+                for (TipoVehiculoProfesional marca : TipoVehiculoProfesional.values()) {
+                    System.out.println(marca.getKey() + ".- " + marca.getValue());
+                }
+                tipoVehiculoPro = TipoVehiculoProfesional.getVehiculoProfesionalByKey(lector.nextInt());
+                lector.nextLine();
+            }
+        }
+
         System.out.println("¿Cual es la marca del vehiculo? - Seleccione un número");
         for (MarcaVehiculo marca : MarcaVehiculo.values()) {
             System.out.println(marca.getKey() + ".- " + marca.getValue());
@@ -250,41 +267,76 @@ public class TallerUned {
         System.out.println("¿Cual es el modelo?");
         String modelo = lector.nextLine();
 
-//        System.out.println("¿Pertenece a un servicio publico? - Responde Si o No");
-//        vehiculo.setPublico(lector.nextLine().equalsIgnoreCase("SI"));
-
-        System.out.println("¿Que tipo de combustible utuliza? - Seleccione un número");
+        System.out.println("¿Que tipo de combustible utiliza? - Seleccione un número");
         for (TipoCombustible combustible : TipoCombustible.values()) {
             System.out.println(combustible.getKey() + ".- " + combustible.getValue());
         }
-        vehiculo.setCombustible(TipoCombustible.getCombustibleByKey(lector.nextInt()));
+        TipoCombustible tipoCombustible = TipoCombustible.getCombustibleByKey(lector.nextInt());
         lector.nextLine();
 
         System.out.println("¿Tiene ABS? - Responde Si o No");
-        vehiculo.setABS(lector.nextLine().equalsIgnoreCase("SI"));
+        Boolean abs = lector.nextLine().equalsIgnoreCase("SI");
 
         System.out.println("¿Caballos?");
-        vehiculo.setCaballos(lector.nextFloat());
+        float caballos = lector.nextFloat();
         lector.nextLine();
 
         System.out.println("¿Cilindrada?");
-        vehiculo.setCilindrada(lector.nextFloat());
+        float cilindrada = lector.nextFloat();
         lector.nextLine();
 
         System.out.println("¿Almacenamiento");
-        vehiculo.setAlmacenamiento(lector.nextFloat());
+        float almacenamiento = lector.nextFloat();
         lector.nextLine();
 
         System.out.println("¿Tiene airbag? - Responde Si o No");
-        vehiculo.setAirbag(lector.nextLine().equalsIgnoreCase("SI"));
+        Boolean airbag = lector.nextLine().equalsIgnoreCase("SI");
 
         System.out.println("¿Tiene GPS integrado? - Responde Si o No");
-        vehiculo.setGPS(lector.nextLine().equalsIgnoreCase("SI"));
+        Boolean gps = lector.nextLine().equalsIgnoreCase("SI");
 
-        Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, MarcaVehiculo.OTRAS, dni, numeroRuedas, Boolean.TRUE, dni, TipoCombustible.OTRO, Boolean.FALSE,
-                numeroRuedas, numeroRuedas, numeroRuedas, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, numeroRuedas, numeroRuedas,
-                Boolean.TRUE, Boolean.TRUE, TipoVehiculoProfesional.OTRO, TipoMoto.OTRO)
-        
+        TipoMoto tipoMoto = TipoMoto.OTRO;
+
+        Boolean descapotable = false;
+        Boolean climatizado = false;
+        int numPasajeros = 0;
+        int numPuertas = 0;
+        Boolean aireAcondicionado = false;
+
+        if (numeroRuedas == 2) {
+
+            System.out.println("¿De que tipo es? - Seleccione un número");
+            for (TipoMoto tipo : TipoMoto.values()) {
+                System.out.println(tipo.getKey() + ".- " + tipo.getValue());
+            }
+            tipoMoto = TipoMoto.getTipoMotoByKey(lector.nextInt());
+            lector.nextLine();
+
+        } else if (numeroRuedas == 4) {
+
+            System.out.println("¿Es descapotable? - Responde Si o No");
+            descapotable = lector.nextLine().equalsIgnoreCase("SI");
+
+            System.out.println("¿Es climatizado? - Responde Si o No");
+            climatizado = lector.nextLine().equalsIgnoreCase("SI");
+
+            System.out.println("¿Cuántos pasajeros entran enº su vehiculo?");
+            numPasajeros = lector.nextInt();
+            lector.nextLine();
+
+            System.out.println("¿Cuántas puertas posee su vehiculo?");
+            numPuertas = lector.nextInt();
+            lector.nextLine();
+
+            System.out.println("¿Tiene aire acondicionado? - Responde Si o No");
+            aireAcondicionado = lector.nextLine().equalsIgnoreCase("SI");
+
+        }
+
+        Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, marca, dni, numeroRuedas, profesional, dni, tipoCombustible, abs,
+                caballos, cilindrada, almacenamiento, airbag, gps, descapotable, climatizado, numPasajeros, numPuertas,
+                aireAcondicionado, tipoVehiculoPro, tipoMoto);
+
         gestora.guardarVehiculo(vehiculo);
         gestora.guardarEnXML();
     }
@@ -322,7 +374,7 @@ public class TallerUned {
         System.out.println("¿Pertenece a un servicio publico? - Responde Si o No");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
-            vehiculo.setPublico(temp.equalsIgnoreCase("SI"));
+            //vehiculo.setPublico(temp.equalsIgnoreCase("SI"));
         }
 
         System.out.println("Combustible [" + vehiculo.getCombustible() + "]: - Seleccione un número");

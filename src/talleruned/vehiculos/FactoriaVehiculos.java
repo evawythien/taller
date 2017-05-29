@@ -7,7 +7,7 @@ package talleruned.vehiculos;
 public class FactoriaVehiculos {
 
     public static Vehiculo crear(String matricula, MarcaVehiculo marca, String modelo, int numeroRuedas, Boolean profesional, String dni, TipoCombustible combustible, Boolean ABS, float caballos,
-            float cilindrada, float almacenamiento, Boolean airbag, Boolean GPS, Boolean descapotable, Boolean climatizado, int numPasajeros, int numPuertas, Boolean climatizador, Boolean aireAcondicionado,
+            float cilindrada, float almacenamiento, Boolean airbag, Boolean GPS, Boolean descapotable, Boolean climatizado, int numPasajeros, int numPuertas, Boolean aireAcondicionado,
             TipoVehiculoProfesional tipoProfesional, TipoMoto tipoMoto) {
 
         Vehiculo v = null;
