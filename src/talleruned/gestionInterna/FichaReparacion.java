@@ -1,6 +1,7 @@
 package talleruned.gestionInterna;
 
 import java.util.Calendar;
+import talleruned.Utilidades;
 
 /* Se crea una por cada visita del cliente */
 public class FichaReparacion {
@@ -67,6 +68,11 @@ public class FichaReparacion {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    @Override
+    public String toString() {
+        return "Indetificador: " + idFicha + "\nFecha:  " + Utilidades.formatFecha(fecha) + "\nCliente:  " + dniCliente + "\nEmpleado:  " + dniEmpleado + "\nMatricula:  " + matricula + "\nEstado=" + estado + "\nComentario:  " + comentario + "\n-----------------------";
     }
 
 }
