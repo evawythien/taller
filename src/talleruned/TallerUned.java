@@ -2,6 +2,7 @@ package talleruned;
 
 import talleruned.gestionInterna.FichaReparacion;
 import java.util.Scanner;
+import talleruned.gestionInterna.Estado;
 import talleruned.usuarios.Cliente;
 import talleruned.usuarios.Empleado;
 import talleruned.vehiculos.VehiculoCuatroRuedas;
@@ -202,13 +203,13 @@ public class TallerUned {
             cliente.setTlfMovil(Integer.parseInt(temp));
         }
 
-        System.out.println("7.- Teléfono fijo [" + cliente.getTlfFijo()+ "]:");
+        System.out.println("7.- Teléfono fijo [" + cliente.getTlfFijo() + "]:");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             cliente.setTlfFijo(Integer.parseInt(temp));
         }
 
-        System.out.println("8.- Fecha de nacimiento(dd/mm/aaaa) [" + Utilidades.formatFecha(cliente.getFechaNacimiento())+ "]:");
+        System.out.println("8.- Fecha de nacimiento(dd/mm/aaaa) [" + Utilidades.formatFecha(cliente.getFechaNacimiento()) + "]:");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             cliente.setFechaNacimiento(Utilidades.parseFecha(temp));
@@ -291,7 +292,8 @@ public class TallerUned {
         vehiculo.setGPS(lector.nextLine().equalsIgnoreCase("SI"));
 
         gestora.guardarVehiculo(vehiculo);
-        gestora.guardarEnXML();
+        gestora.guardarEnXML();       
+        
     }
 
     public static void editarCoche() {
@@ -309,7 +311,7 @@ public class TallerUned {
         } while ((vehiculo = gestora.getVehiculo(matricula)) == null);
 
         String temp;
-        System.out.println("Marca [" + vehiculo.getMarca()+ "]: - Seleccione un número");
+        System.out.println("Marca [" + vehiculo.getMarca() + "]: - Seleccione un número");
         for (MarcaVehiculo marca : MarcaVehiculo.values()) {
             System.out.println(marca.getKey() + ".- " + marca.getValue());
         }
@@ -318,7 +320,7 @@ public class TallerUned {
             vehiculo.setMarca(MarcaVehiculo.getMarcaByKey(Integer.parseInt(temp)));
         }
 
-        System.out.println("Modelo [" + vehiculo.getModelo()+ "]:");
+        System.out.println("Modelo [" + vehiculo.getModelo() + "]:");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             vehiculo.setModelo(temp);
@@ -330,39 +332,39 @@ public class TallerUned {
             vehiculo.setPublico(temp.equalsIgnoreCase("SI"));
         }
 
-        System.out.println("Combustible [" + vehiculo.getCombustible()+ "]: - Seleccione un número");
+        System.out.println("Combustible [" + vehiculo.getCombustible() + "]: - Seleccione un número");
         for (TipoCombustible combustible : TipoCombustible.values()) {
             System.out.println(combustible.getKey() + ".- " + combustible.getValue());
         }
         vehiculo.setCombustible(TipoCombustible.getCombustibleByKey(Integer.parseInt(temp)));
 
-        System.out.println("ABS [" + vehiculo.getABS()+ "]: - Responde Si o No");
+        System.out.println("ABS [" + vehiculo.getABS() + "]: - Responde Si o No");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             vehiculo.setABS(temp.equalsIgnoreCase("SI"));
         }
 
-        System.out.println("Caballos [" + vehiculo.getCaballos()+ "]:");
+        System.out.println("Caballos [" + vehiculo.getCaballos() + "]:");
         if (!"".equals(temp)) {
             vehiculo.setCaballos(Integer.parseInt(temp));
         }
 
-        System.out.println("Cilindrada [" + vehiculo.getCilindrada()+ "]:");
+        System.out.println("Cilindrada [" + vehiculo.getCilindrada() + "]:");
         if (!"".equals(temp)) {
             vehiculo.setCilindrada(Integer.parseInt(temp));
         }
 
-        System.out.println("Almacenamiento [" + vehiculo.getAlmacenamiento()+ "]:");
+        System.out.println("Almacenamiento [" + vehiculo.getAlmacenamiento() + "]:");
         if (!"".equals(temp)) {
             vehiculo.setAlmacenamiento(Integer.parseInt(temp));
         }
 
-        System.out.println("Airbag [" + vehiculo.getAirbag()+ "]: - Responde Si o No");
+        System.out.println("Airbag [" + vehiculo.getAirbag() + "]: - Responde Si o No");
         if (!"".equals(temp)) {
             vehiculo.setAirbag(temp.equalsIgnoreCase("SI"));
         }
 
-        System.out.println("GPS [" + vehiculo.getGPS()+ "]: - Responde Si o No");
+        System.out.println("GPS [" + vehiculo.getGPS() + "]: - Responde Si o No");
         if (!"".equals(temp)) {
             vehiculo.setGPS(temp.equalsIgnoreCase("SI"));
         }
@@ -379,6 +381,7 @@ public class TallerUned {
         System.out.println("Motivo de la visita:");
         ficha.setComentario(lector.nextLine());
         ficha.setDniCliente(dni);
+        ficha.setEstado(Estado.PENDIENTE); // Al iniciar por defecto el estado es 1 PENDIENTE
         ficha.setMatricula(matricula);
         ficha.setDniEmpleado(dniEmpleado);
         ficha.setFecha(Utilidades.getFechaActual());
