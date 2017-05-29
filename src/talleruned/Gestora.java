@@ -1,9 +1,11 @@
 package talleruned;
 
+import java.util.ArrayList;
 import talleruned.gestionInterna.FichaReparacion;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import talleruned.gestionInterna.Estado;
 import talleruned.gestionInterna.Mensaje;
 import talleruned.tareas.Tarea;
@@ -13,7 +15,7 @@ import talleruned.vehiculos.Vehiculo;
 
 public class Gestora {
 
-    private HashMap<String, Cliente> clientes;
+    private final HashMap<String, Cliente> clientes;
     private HashMap<String, Vehiculo> vehiculos;
     private HashMap<Integer, FichaReparacion> fichas;
     private HashMap<String, Empleado> empleados;
@@ -23,6 +25,7 @@ public class Gestora {
     private int idUltimaFicha;
 
     public Gestora() {
+
         this.clientes = new HashMap<>();
         this.vehiculos = new HashMap<>();
         this.fichas = new HashMap<>();
@@ -75,9 +78,9 @@ public class Gestora {
 
     public void obtenerDeXML() {
 
-        clientes = GestoraPersistencia.leerEnXML("clientes.xml");
-        vehiculos = GestoraPersistencia.leerEnXML("vehiculos.xml");
-        fichas = GestoraPersistencia.leerEnXML("fichas.xml");
+        clientes.putAll(GestoraPersistencia.leerEnXML("clientes.xml"));
+        vehiculos.putAll(GestoraPersistencia.leerEnXML("vehiculos.xml"));
+        fichas.putAll(GestoraPersistencia.leerEnXML("fichas.xml"));
         if (!fichas.isEmpty()) {
             idUltimaFicha = Collections.max(fichas.keySet());
         }
@@ -93,6 +96,20 @@ public class Gestora {
 
     public Vehiculo getVehiculo(String matricula) {
         return vehiculos.get(matricula);
+    }
+
+    public FichaReparacion getFichaReparacion(int idFicha) {
+        return fichas.get(idFicha);
+    }
+
+    public List<FichaReparacion> getFichasReparacionPorEmpleado(String dniEmpleado) {
+        List<FichaReparacion> fichasReparacion = new ArrayList<>();
+        for (FichaReparacion ficha : fichas.values()) {
+            if (ficha.getDniEmpleado().equals(dniEmpleado)) {
+                fichasReparacion.add(ficha);
+            }
+        }
+        return fichasReparacion;
     }
 
     public void guardarFichaReparacion(FichaReparacion ficha) {

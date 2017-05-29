@@ -33,13 +33,13 @@ public class Utilidades {
         return calendar;
     }
 
+    public static String formatFecha(Calendar fecha) {
+        return sdf.format(fecha.getTime());
+    }
+
     public static Boolean isBetweenDates(Calendar fechaInicio, Calendar fechaFin) {
 
-        Boolean respuesta = false;
-        if (fechaInicio.after(getFechaActual()) && fechaFin.before(getFechaActual())) {
-            respuesta = true;
-        }
-        return respuesta;
+        return fechaInicio.after(getFechaActual()) && fechaFin.before(getFechaActual());
     }
 
 }

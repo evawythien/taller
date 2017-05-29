@@ -1,6 +1,5 @@
 package talleruned;
 
-import java.util.Calendar;
 import talleruned.gestionInterna.FichaReparacion;
 import java.util.Scanner;
 import talleruned.usuarios.Cliente;
@@ -38,15 +37,12 @@ public class TallerUned {
         switch (opcion) {
             case 1:
                 gestionFichas();
-                System.out.flush(); // Limpiamos consola
                 break;
             case 2:
                 gestionVehiculos();
-                System.out.flush(); // Limpiamos consola
                 break;
             case 3:
                 gestionClientes();
-                System.out.flush(); // Limpiamos consola
                 break;
         }
     }
@@ -80,9 +76,9 @@ public class TallerUned {
         Scanner lector = new Scanner(System.in);
 
         System.out.println("¿Que quiere hacer?:");
-        System.out.println("1.- Añadir un nuevo vehículo");
-        System.out.println("2.- Modificar un vehiculo existente");
-        System.out.println("3.- Ver listado de vehiculos");
+        System.out.println("1.- Añadir un nuevo vehículo.");
+        System.out.println("2.- Modificar un vehiculo existente.");
+        System.out.println("3.- Ver listado de vehiculos.");
         int opcion = lector.nextInt();
 
         switch (opcion) {
@@ -93,7 +89,7 @@ public class TallerUned {
                 editarCoche();
                 break;
             case 3:
-                gestora.listadoVehiculos();
+                System.out.println(gestora.listadoVehiculos());
                 break;
         }
     }
@@ -103,20 +99,20 @@ public class TallerUned {
         Scanner lector = new Scanner(System.in);
 
         System.out.println("¿Que quiere hacer?:");
-        System.out.println("1.- Mostrar listado de fichas");
-        System.out.println("2.- Modificar ficha");
-        System.out.println("3.- Mostrar fichas propias");
+        System.out.println("1.- Mostrar listado de fichas.");
+        System.out.println("2.- Modificar ficha.");
+        System.out.println("3.- Mostrar fichas empleado.");
         int opcion = lector.nextInt();
 
         switch (opcion) {
             case 1:
-                gestora.listadoFichas();
+                System.out.println(gestora.listadoFichas());
                 break;
             case 2:
                 editarFicha();
                 break;
             case 3:
-                gestora.listadoVehiculos();
+                System.out.println(gestora.getFichasReparacionPorEmpleado(getDniExistente()));
                 break;
         }
     }
@@ -206,13 +202,13 @@ public class TallerUned {
             cliente.setTlfMovil(Integer.parseInt(temp));
         }
 
-        System.out.println("7.- Teléfono fijo [" + cliente.getDireccion() + "]:");
+        System.out.println("7.- Teléfono fijo [" + cliente.getTlfFijo()+ "]:");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             cliente.setTlfFijo(Integer.parseInt(temp));
         }
 
-        System.out.println("8.- Fecha de nacimiento(dd/mm/aaaa): ");
+        System.out.println("8.- Fecha de nacimiento(dd/mm/aaaa) [" + Utilidades.formatFecha(cliente.getFechaNacimiento())+ "]:");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             cliente.setFechaNacimiento(Utilidades.parseFecha(temp));
@@ -313,7 +309,7 @@ public class TallerUned {
         } while ((vehiculo = gestora.getVehiculo(matricula)) == null);
 
         String temp;
-        System.out.println("¿Cual es la marca del vehiculo? - Seleccione un número");
+        System.out.println("Marca [" + vehiculo.getMarca()+ "]: - Seleccione un número");
         for (MarcaVehiculo marca : MarcaVehiculo.values()) {
             System.out.println(marca.getKey() + ".- " + marca.getValue());
         }
@@ -322,7 +318,7 @@ public class TallerUned {
             vehiculo.setMarca(MarcaVehiculo.getMarcaByKey(Integer.parseInt(temp)));
         }
 
-        System.out.println("¿Cual es el modelo?");
+        System.out.println("Modelo [" + vehiculo.getModelo()+ "]:");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             vehiculo.setModelo(temp);
@@ -334,39 +330,39 @@ public class TallerUned {
             vehiculo.setPublico(temp.equalsIgnoreCase("SI"));
         }
 
-        System.out.println("¿Que tipo de combustible utuliza? - Seleccione un número");
+        System.out.println("Combustible [" + vehiculo.getCombustible()+ "]: - Seleccione un número");
         for (TipoCombustible combustible : TipoCombustible.values()) {
             System.out.println(combustible.getKey() + ".- " + combustible.getValue());
         }
         vehiculo.setCombustible(TipoCombustible.getCombustibleByKey(Integer.parseInt(temp)));
 
-        System.out.println("¿Tiene ABS? - Responde Si o No");
+        System.out.println("ABS [" + vehiculo.getABS()+ "]: - Responde Si o No");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             vehiculo.setABS(temp.equalsIgnoreCase("SI"));
         }
 
-        System.out.println("¿Caballos?");
+        System.out.println("Caballos [" + vehiculo.getCaballos()+ "]:");
         if (!"".equals(temp)) {
             vehiculo.setCaballos(Integer.parseInt(temp));
         }
 
-        System.out.println("¿Cilindrada?");
+        System.out.println("Cilindrada [" + vehiculo.getCilindrada()+ "]:");
         if (!"".equals(temp)) {
             vehiculo.setCilindrada(Integer.parseInt(temp));
         }
 
-        System.out.println("¿Almacenamiento");
+        System.out.println("Almacenamiento [" + vehiculo.getAlmacenamiento()+ "]:");
         if (!"".equals(temp)) {
             vehiculo.setAlmacenamiento(Integer.parseInt(temp));
         }
 
-        System.out.println("¿Tiene airbag? - Responde Si o No");
+        System.out.println("Airbag [" + vehiculo.getAirbag()+ "]: - Responde Si o No");
         if (!"".equals(temp)) {
             vehiculo.setAirbag(temp.equalsIgnoreCase("SI"));
         }
 
-        System.out.println("¿Tiene GPS integrado? - Responde Si o No");
+        System.out.println("GPS [" + vehiculo.getGPS()+ "]: - Responde Si o No");
         if (!"".equals(temp)) {
             vehiculo.setGPS(temp.equalsIgnoreCase("SI"));
         }
