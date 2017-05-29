@@ -55,6 +55,9 @@ public class TallerUned {
                 case 4:
                     realizarBusquedas();
                     break;
+                case 5:
+                    pedirDatosFichaReparación();
+                    break;
             }
         }
     }
@@ -70,7 +73,7 @@ public class TallerUned {
 
         switch (opcion) {
             case 1:
-                pedirDatosUsuario();
+                pedirDatosUsuario(null);
                 break;
             case 2:
                 editarCliente();
@@ -92,7 +95,7 @@ public class TallerUned {
 
         switch (opcion) {
             case 1:
-                pedirDatosCoche(getDniExistente());
+                pedirDatosCoche(getDniExistente(), null);
                 break;
             case 2:
                 editarCoche();
@@ -136,16 +139,18 @@ public class TallerUned {
         }
     }
 
-    public static void pedirDatosUsuario() {
+    public static void pedirDatosUsuario(String dni) {
 
         Cliente cliente = new Cliente();
         System.out.println("A continuación le vamos a pedir unos datos para la inscripción del taller");
         System.out.println("-------------------------------------------------------------------------");
 
-        System.out.println("1.- DNI:");
-        String dni = lector.nextLine();
-        if (ValidacionDatos.comprobarDni(dni)) {
-            cliente.setDni(dni);
+        if (dni == null) {
+            System.out.println("1.- DNI:");
+            dni = lector.nextLine();
+            if (ValidacionDatos.comprobarDni(dni)) {
+                cliente.setDni(dni);
+            }
         }
 
         System.out.println("2.- Nombre:");
@@ -235,7 +240,7 @@ public class TallerUned {
 
     }
 
-    public static void pedirDatosCoche(String dni) {
+    public static void pedirDatosCoche(String dni, String matricula) {
 
         if (dni == null) {
             return;
@@ -245,14 +250,15 @@ public class TallerUned {
         int numeroRuedas = lector.nextInt();
         lector.nextLine();
 
-        String matricula;
-        do {
-            System.out.println("¿Cual es la matricula del vehiculo?");
-            matricula = lector.nextLine();
-            if ("".equals(matricula)) {
-                return;
-            }
-        } while (!ValidacionDatos.comprobarMatricula(matricula));
+        if (matricula == null) {
+            do {
+                System.out.println("¿Cual es la matricula del vehiculo?");
+                matricula = lector.nextLine();
+                if ("".equals(matricula)) {
+                    return;
+                }
+            } while (!ValidacionDatos.comprobarMatricula(matricula));
+        }
 
         Boolean profesional = false;
         TipoVehiculoProfesional tipoVehiculoPro = TipoVehiculoProfesional.OTRO;
@@ -536,7 +542,25 @@ public class TallerUned {
         gestora.guardarEnXML();
     }
 
-    public static void pedirDatosFichaReparación(String matricula, String dni) {
+    public static void pedirDatosFichaReparación() {
+
+        String matricula, dni;
+
+        System.out.println("Introduce el dni del cliente:");
+        dni = lector.nextLine();
+        if (gestora.getCliente(dni) == null) {
+            pedirDatosUsuario(dni);
+        } else {
+            System.out.println("Cliente existente (" + dni + ")");
+        }
+
+        System.out.println("Introduce la matrícula:");
+        matricula = lector.nextLine();
+        if (gestora.getVehiculo(matricula) == null) {
+            pedirDatosCoche(dni, matricula);
+        } else {
+            System.out.println("Vehículo existente (" + matricula + ")");
+        }
 
         FichaReparacion ficha = new FichaReparacion();
 
