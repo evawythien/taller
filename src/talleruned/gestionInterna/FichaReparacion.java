@@ -1,6 +1,7 @@
 package talleruned.gestionInterna;
 
 import java.util.Calendar;
+import talleruned.tareas.Tarea;
 
 /* Se crea una por cada visita del cliente */
 public class FichaReparacion {
@@ -12,6 +13,7 @@ public class FichaReparacion {
     private String matricula;
     private Estado estado;
     private String comentario;
+    private Tarea tarea;
 
     public int getIdFicha() {
         return idFicha;
@@ -67,6 +69,14 @@ public class FichaReparacion {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public Tarea getTarea() {
+        return tarea;
+    }
+
+    public void setTarea(Tarea tarea) {
+        this.tarea = tarea;
     }
 
 }

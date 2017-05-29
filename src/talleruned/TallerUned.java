@@ -3,6 +3,7 @@ package talleruned;
 import talleruned.gestionInterna.FichaReparacion;
 import java.util.Scanner;
 import talleruned.gestionInterna.Estado;
+import talleruned.tareas.Tarea;
 import talleruned.usuarios.Cliente;
 import talleruned.usuarios.Empleado;
 import talleruned.vehiculos.FactoriaVehiculos;
@@ -571,6 +572,14 @@ public class TallerUned {
 
         System.out.println("Motivo de la visita:");
         ficha.setComentario(lector.nextLine());
+
+        System.out.println("¿Que tarea? - Seleccione un número");
+        for (Tarea t : Tarea.values()) {
+            System.out.println(t.getIdTarea() + ".- " + t.getNombre() + " (" + t.getCoste() + ")");
+        }
+        ficha.setTarea(Tarea.getTareaByKey(lector.nextInt()));
+        lector.nextLine();
+
         ficha.setDniCliente(dni);
         ficha.setEstado(Estado.PENDIENTE); // Al iniciar por defecto el estado es 1 PENDIENTE
         ficha.setMatricula(matricula);
@@ -583,6 +592,40 @@ public class TallerUned {
 
     public static void editarFicha() {
 
+        String temp = null;
+        FichaReparacion ficha;
+
+        int id;
+        do {
+            System.out.println("1.- Introduzca una matricula para modificar:");
+            temp = lector.nextLine();
+            if ("".equals(temp)) {
+                return;
+            }
+            id = Integer.parseInt(temp);
+        } while ((ficha = gestora.getFichaReparacion(id)) == null);
+
+        System.out.println("Motivo de la visita [" + ficha.getComentario() + "]:");
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            ficha.setComentario(temp);
+        }
+
+        System.out.println("¿Que tarea? - Seleccione un número [" + ficha.getTarea().getIdTarea() + "]");
+        for (Tarea t : Tarea.values()) {
+            System.out.println(t.getIdTarea() + ".- " + t.getNombre() + " (" + t.getCoste() + ")");
+        }
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            ficha.setTarea(Tarea.getTareaByKey(Integer.parseInt(temp)));
+        }
+
+        System.out.println("¿Estado? - Seleccione un número [" + ficha.getEstado().getKey() + ".- " + ficha.getEstado().getValue() + "]");
+        for (Estado estado : Estado.values()) {
+            System.out.println(estado.getKey() + ".- " + estado.getValue());
+        }
+        ficha.setEstado(Estado.getEstadoByKey(lector.nextInt()));
+        lector.nextLine();
     }
 
     public static String getDniExistente() {

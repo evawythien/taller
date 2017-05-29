@@ -1,5 +1,7 @@
 package talleruned.tareas;
 
+import talleruned.vehiculos.TipoCombustible;
+
 public enum Tarea {
 
     OTRA(0, "Otra", 300.f),
@@ -22,6 +24,27 @@ public enum Tarea {
         this.idTarea = idTarea;
         this.nombre = nombre;
         this.coste = coste;
+    }
+
+    public Integer getIdTarea() {
+        return idTarea;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Float getCoste() {
+        return coste;
+    }
+
+    public static Tarea getTareaByKey(int id) {
+        for (Tarea t : Tarea.values()) {
+            if (t.getIdTarea() == id) {
+                return t;
+            }
+        }
+        return Tarea.OTRA;
     }
 
 }
