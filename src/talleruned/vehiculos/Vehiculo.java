@@ -119,5 +119,7 @@ public class Vehiculo {
     public void setGPS(Boolean GPS) {
         this.GPS = GPS;
     }
+    
+    
 
 }
