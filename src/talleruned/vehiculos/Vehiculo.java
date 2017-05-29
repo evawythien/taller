@@ -1,5 +1,7 @@
 package talleruned.vehiculos;
 
+import talleruned.Utilidades;
+
 public class Vehiculo {
 
     private String matricula; // Identificador del coche
@@ -110,5 +112,11 @@ public class Vehiculo {
     public void setGPS(Boolean GPS) {
         this.GPS = GPS;
     }
+
+    @Override
+    public String toString() {
+        return "Vehiculo" + "\nMatricula:  " + matricula + "\nMarca:  " + marca + "\nModelo:  " + modelo +  "\nPropiertario:  " + dni+ "\nCombustible:  " + combustible + "\nABS:  " + Utilidades.booleanToString(ABS) + "\nCaballos:  " + caballos + "\nCilindrada:  " + cilindrada + "\nalmacenamiento:  " + almacenamiento + "\nAirbag:  " + Utilidades.booleanToString(airbag) + "\nGPS:  " + Utilidades.booleanToString(GPS) + "\n------------------------------------";
+    }   
+    
 
 }

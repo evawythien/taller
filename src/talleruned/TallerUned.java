@@ -2,6 +2,7 @@ package talleruned;
 
 import talleruned.gestionInterna.FichaReparacion;
 import java.util.Scanner;
+import talleruned.gestionInterna.Estado;
 import talleruned.usuarios.Cliente;
 import talleruned.usuarios.Empleado;
 import talleruned.vehiculos.FactoriaVehiculos;
@@ -337,7 +338,8 @@ public class TallerUned {
                 climatizado, numPasajeros, numPuertas, aireAcondicionado, tipoVehiculoPro, tipoMoto);
 
         gestora.guardarVehiculo(vehiculo);
-        gestora.guardarEnXML();
+        gestora.guardarEnXML();       
+        
     }
 
     public static void editarCoche() {
@@ -425,6 +427,7 @@ public class TallerUned {
         System.out.println("Motivo de la visita:");
         ficha.setComentario(lector.nextLine());
         ficha.setDniCliente(dni);
+        ficha.setEstado(Estado.PENDIENTE); // Al iniciar por defecto el estado es 1 PENDIENTE
         ficha.setMatricula(matricula);
         ficha.setDniEmpleado(dniEmpleado);
         ficha.setFecha(Utilidades.getFechaActual());
