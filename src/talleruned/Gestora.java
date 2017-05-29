@@ -37,17 +37,7 @@ public class Gestora {
         this.mensajes = new HashMap<>();
         this.empleados.put("1234", new Empleado("mecanico", "Paco", "Garcia", "Garcia", "1234", "Calle de abajo", 983666555, 633552244, Utilidades.getFecha(12, 12, 1960)));
         this.empleados.put("9876", new Empleado("mecanico", "Pepe", "Perez", "Perez", "9876", "Calle de arriba", 983666555, 633552244, Utilidades.getFecha(1, 1, 1989)));
-        this.tareas.put(0, new Tarea(0, "Otra", 300.f));
-        this.tareas.put(1, new Tarea(1, "Revisión filtro de particulas", 200.f));
-        this.tareas.put(2, new Tarea(2, "Revisión de sirena", 40.f));
-        this.tareas.put(3, new Tarea(3, "Revisión presion neumáticos", 10.f));
-        this.tareas.put(4, new Tarea(4, "Revisión aceite", 30.f));
-        this.tareas.put(5, new Tarea(5, "Revisión técnica (ITV)", 300.f));
-        this.tareas.put(6, new Tarea(6, "Revisión pre ITV", 0.f));
-        this.tareas.put(7, new Tarea(7, "Llevar coche ITV", 0.f));
-        this.tareas.put(8, new Tarea(8, "Reparaciones adicionales", 0.f));
-        this.tareas.put(9, new Tarea(9, "Puesta a punto", 150.f));
-        this.tareas.put(10, new Tarea(10, "Cambio neumaticos", 500.f));
+        
         this.promociones.put(1, new Promocion(1, 9, "Puesta a punto periodo Semana Santa", Utilidades.getFecha(1, 4, 2017), Utilidades.getFecha(30, 4, 2017), 100.f));
         this.promociones.put(2, new Promocion(2, 9, "Puesta a punto periodo Verano", Utilidades.getFecha(1, 2, 2017), Utilidades.getFecha(30, 9, 2017), 90.f));
         this.promociones.put(3, new Promocion(3, 9, "Puesta a punto periodo Navidad", Utilidades.getFecha(1, 12, 2017), Utilidades.getFecha(5, 1, 2018), 110.f));
