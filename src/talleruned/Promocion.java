@@ -1,21 +1,24 @@
 package talleruned;
 
-import java.util.Date;
+import java.util.Calendar;
+
 public class Promocion {
-    
-    private int idPromocion;
-    private String nombre;
-    private Boolean ofertada;
-    private Date fechaInicio;
-    private Date fechaFin;
-    private Double precio;
-    private Date fechaOfertada;
-    
-    // Puesta a punto se oferta antes de los periodos vacacionales
-// Semana Santa, Verano, Navidad
-//Cambio de neumaticos
-//Cambio de filtro
-//Cambio de aceite
+
+    protected int idPromocion;
+    protected int idTarea;
+    protected String descripcion;
+    protected Calendar fechaInicio;
+    protected Calendar fechaFin;
+    protected Float precio;
+
+    public Promocion(int idPromocion, int idTarea, String descripcion, Calendar fechaInicio, Calendar fechaFin, Float precio) {
+        this.idPromocion = idPromocion;
+        this.idTarea = idTarea;
+        this.descripcion = descripcion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.precio = precio;
+    }
 
     public int getIdPromocion() {
         return idPromocion;
@@ -25,66 +28,44 @@ public class Promocion {
         this.idPromocion = idPromocion;
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getIdTarea() {
+        return idTarea;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setIdTarea(int idTarea) {
+        this.idTarea = idTarea;
     }
 
-    public Boolean getOfertada() {
-        return ofertada;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setOfertada(Boolean ofertada) {
-        this.ofertada = ofertada;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public Date getFechaInicio() {
+    public Calendar getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(Calendar fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public Calendar getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(Calendar fechaFin) {
         this.fechaFin = fechaFin;
     }
 
-    public Double getPrecio() {
+    public Float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(Float precio) {
         this.precio = precio;
     }
 
-    public Date getFechaOfertada() {
-        return fechaOfertada;
-    }
-
-    public void setFechaOfertada(Date fechaOfertada) {
-        this.fechaOfertada = fechaOfertada;
-    }
-
-    public Promocion(int idPromocion, String nombre, Boolean ofertada, Date fechaInicio, Date fechaFin, Double precio, Date fechaOfertada) {
-        this.idPromocion = idPromocion;
-        this.nombre = nombre;
-        this.ofertada = ofertada;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.precio = precio;
-        this.fechaOfertada = fechaOfertada;
-    }   
-    
 }
-
-
-
-

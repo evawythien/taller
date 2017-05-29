@@ -33,4 +33,13 @@ public class Utilidades {
         return calendar;
     }
 
+    public static Boolean isBetweenDates(Calendar fechaInicio, Calendar fechaFin) {
+
+        Boolean respuesta = false;
+        if (fechaInicio.after(getFechaActual()) && fechaFin.before(getFechaActual())) {
+            respuesta = true;
+        }
+        return respuesta;
+    }
+
 }

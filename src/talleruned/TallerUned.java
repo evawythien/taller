@@ -37,13 +37,86 @@ public class TallerUned {
 
         switch (opcion) {
             case 1:
-                // lista de gichas
+                gestionFichas();
+                System.out.flush(); // Limpiamos consola
                 break;
             case 2:
                 gestionVehiculos();
+                System.out.flush(); // Limpiamos consola
                 break;
             case 3:
                 gestionClientes();
+                System.out.flush(); // Limpiamos consola
+                break;
+        }
+    }
+
+    public static void gestionClientes() {
+
+        Scanner lector = new Scanner(System.in);
+
+        System.out.println("¿Que quiere hacer?:");
+        System.out.println("1.- Añadir un nuevo cliente");
+        System.out.println("2.- Modificar un cliente existente");
+        System.out.println("3.- Ver listado de clientes");
+        int opcion = lector.nextInt();
+        lector.nextLine();
+
+        switch (opcion) {
+            case 1:
+                pedirDatosUsuario();
+                break;
+            case 2:
+                editarCliente();
+                break;
+            case 3:
+                System.out.println(gestora.listadoClientes());
+                break;
+        }
+    }
+
+    public static void gestionVehiculos() {
+
+        Scanner lector = new Scanner(System.in);
+
+        System.out.println("¿Que quiere hacer?:");
+        System.out.println("1.- Añadir un nuevo vehículo");
+        System.out.println("2.- Modificar un vehiculo existente");
+        System.out.println("3.- Ver listado de vehiculos");
+        int opcion = lector.nextInt();
+
+        switch (opcion) {
+            case 1:
+                pedirDatosCoche(getDniExistente());
+                break;
+            case 2:
+                editarCoche();
+                break;
+            case 3:
+                gestora.listadoVehiculos();
+                break;
+        }
+    }
+
+    public static void gestionFichas() {
+
+        Scanner lector = new Scanner(System.in);
+
+        System.out.println("¿Que quiere hacer?:");
+        System.out.println("1.- Mostrar listado de fichas");
+        System.out.println("2.- Modificar ficha");
+        System.out.println("3.- Mostrar fichas propias");
+        int opcion = lector.nextInt();
+
+        switch (opcion) {
+            case 1:
+                gestora.listadoFichas();
+                break;
+            case 2:
+                editarFicha();
+                break;
+            case 3:
+                gestora.listadoVehiculos();
                 break;
         }
     }
@@ -76,41 +149,17 @@ public class TallerUned {
         System.out.println("6.- Teléfono movil:");
         cliente.setTlfMovil(lector.nextInt());
         lector.nextLine();
-        
+
         System.out.println("7.- Teléfono fijo:");
         cliente.setTlfFijo(lector.nextInt());
         lector.nextLine();
-        
+
         System.out.println("8.- Fecha de nacimiento(dd/mm/aaaa):");
         cliente.setFechaNacimiento(Utilidades.parseFecha(lector.nextLine()));
 
         gestora.guardarCliente(cliente);
         gestora.guardarEnXML();
 
-    }
-
-    public static void gestionClientes() {
-
-        Scanner lector = new Scanner(System.in);
-
-        System.out.println("¿Que quiere hacer?:");
-        System.out.println("1.- Añadir un nuevo cliente");
-        System.out.println("2.- Modificar un cliente existente");
-        System.out.println("3.- Ver listado de clientes");
-        int opcion = lector.nextInt();
-        lector.nextLine();
-
-        switch (opcion) {
-            case 1:
-                pedirDatosUsuario();
-                break;
-            case 2:
-                editarCliente();
-                break;
-            case 3:
-                System.out.println(gestora.listadoClientes());
-                break;
-        }
     }
 
     public static void editarCliente() {
@@ -326,29 +375,6 @@ public class TallerUned {
         gestora.guardarEnXML();
     }
 
-    public static void gestionVehiculos() {
-
-        Scanner lector = new Scanner(System.in);
-
-        System.out.println("¿Que quiere hacer?:");
-        System.out.println("1.- Añadir un nuevo vehículo");
-        System.out.println("2.- Modificar un vehiculo existente");
-        System.out.println("3.- Ver listado de vehiculos");
-        int opcion = lector.nextInt();
-
-        switch (opcion) {
-            case 1:
-                pedirDatosCoche(getDniExistente());
-                break;
-            case 2:
-                editarCoche();
-                break;
-            case 3:
-                gestora.listadoVehiculos();
-                break;
-        }
-    }
-
     public static void pedirDatosFichaReparación(String matricula, String dni, String dniEmpleado) {
 
         Scanner lector = new Scanner(System.in);
@@ -363,6 +389,12 @@ public class TallerUned {
 
         gestora.guardarFichaReparacion(ficha);
         gestora.guardarEnXML();
+    }
+
+    public static void editarFicha() {
+
+        Scanner lector = new Scanner(System.in);
+
     }
 
     public static String getDniExistente() {

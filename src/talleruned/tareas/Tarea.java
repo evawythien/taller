@@ -2,15 +2,24 @@ package talleruned.tareas;
 
 public class Tarea {
 
+    private int idTarea;
     private String nombre;
-    private String descripción;
-    private Double coste;
-    private int especifica;
+    private Float coste;
 
-    /*REVISAR_FILTRO_PARTICULAS, 
-    REVISION_SIRENA, 
-    PRESION_NEUMARICOS, 
-    ACEITE,*/
+    public Tarea(int idTarea, String nombre, Float coste) {
+        this.idTarea = idTarea;
+        this.nombre = nombre;
+        this.coste = coste;
+    }
+
+    public int getIdTarea() {
+        return idTarea;
+    }
+
+    public void setIdTarea(int idTarea) {
+        this.idTarea = idTarea;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -19,25 +28,11 @@ public class Tarea {
         this.nombre = nombre;
     }
 
-    public String getDescripción() {
-        return descripción;
-    }
-
-    public void setDescripción(String descripción) {
-        this.descripción = descripción;
-    }
-
-    public Double getCoste() {
+    public Float getCoste() {
         return coste;
     }
 
-    public void setCoste(Double coste) {
-        this.coste = coste;
-    }
-
-    public Tarea(String nombre, String descripción, Double coste) {
-        this.nombre = nombre;
-        this.descripción = descripción;
+    public void setCoste(Float coste) {
         this.coste = coste;
     }
 
