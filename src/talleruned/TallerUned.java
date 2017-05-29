@@ -11,6 +11,7 @@ import talleruned.vehiculos.TipoCombustible;
 import talleruned.vehiculos.TipoMoto;
 import talleruned.vehiculos.TipoVehiculoProfesional;
 import talleruned.vehiculos.Vehiculo;
+import talleruned.vehiculos.VehiculoCuatroRuedas;
 import talleruned.vehiculos.VehiculoProfesional;
 
 public class TallerUned {
@@ -406,29 +407,46 @@ public class TallerUned {
         }
 
         Boolean abs = vehiculoOriginal.getABS();
-        System.out.println("¿Tiene ABS? - Responde Si o No [" + abs + "]");
+        System.out.println("¿Tiene ABS? - Responde Si o No [" + Utilidades.booleanToString(abs) + "]");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             abs = temp.equalsIgnoreCase("SI");
         }
 
-        System.out.println("¿Caballos?");
-        float caballos = lector.nextFloat();
-        lector.nextLine();
+        float caballos = vehiculoOriginal.getCaballos();
+        System.out.println("¿Caballos? [" + caballos + "]");
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            caballos = Float.parseFloat(temp);
+        }
 
-        System.out.println("¿Cilindrada?");
-        float cilindrada = lector.nextFloat();
-        lector.nextLine();
+        float cilindrada = vehiculoOriginal.getCilindrada();
+        System.out.println("¿Cilindrada? [" + cilindrada + "]");
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            cilindrada = Float.parseFloat(temp);
+        }
 
-        System.out.println("¿Almacenamiento");
-        float almacenamiento = lector.nextFloat();
-        lector.nextLine();
+        float almacenamiento = vehiculoOriginal.getAlmacenamiento();
+        System.out.println("¿Almacenamiento [" + cilindrada + "]");
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            almacenamiento = Float.parseFloat(temp);
+        }
 
-        System.out.println("¿Tiene airbag? - Responde Si o No");
-        Boolean airbag = lector.nextLine().equalsIgnoreCase("SI");
+        Boolean airbag = vehiculoOriginal.getAirbag();
+        System.out.println("¿Tiene airbag? - Responde Si o No [" + Utilidades.booleanToString(airbag) + "]");
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            airbag = temp.equalsIgnoreCase("SI");
+        }
 
-        System.out.println("¿Tiene GPS integrado? - Responde Si o No");
-        Boolean gps = lector.nextLine().equalsIgnoreCase("SI");
+        Boolean gps = vehiculoOriginal.getGPS();
+        System.out.println("¿Tiene GPS integrado? - Responde Si o No [" + Utilidades.booleanToString(gps) + "]");
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            gps = temp.equalsIgnoreCase("SI");
+        }
 
         TipoMoto tipoMoto = TipoMoto.OTRO;
 
@@ -449,30 +467,49 @@ public class TallerUned {
 
         } else if (numeroRuedas == 4) {
 
-            System.out.println("¿Es descapotable? - Responde Si o No");
-            descapotable = lector.nextLine().equalsIgnoreCase("SI");
+            VehiculoCuatroRuedas vcr = vehiculoOriginal instanceof VehiculoCuatroRuedas ? (VehiculoCuatroRuedas) vehiculoOriginal : null;
+            if (vcr != null) {
+                descapotable = vcr.getDescapotable();
+                climatizado = vcr.getClimatizado();
+                numPasajeros = vcr.getNumPasajeros();
+                numPuertas = vcr.getNumPuertas();
+                aireAcondicionado = vcr.getAireAcondicionado();
+            }
 
-            System.out.println("¿Es climatizado? - Responde Si o No");
-            climatizado = lector.nextLine().equalsIgnoreCase("SI");
+            System.out.println("¿Es descapotable? - Responde Si o No [" + Utilidades.booleanToString(descapotable) + "]");
+            temp = lector.nextLine();
+            if (!"".equals(temp)) {
+                descapotable = temp.equalsIgnoreCase("SI");
+            }
 
-            System.out.println("¿Cuántos pasajeros entran enº su vehiculo?");
-            numPasajeros = lector.nextInt();
-            lector.nextLine();
+            System.out.println("¿Es climatizado? - Responde Si o No [" + Utilidades.booleanToString(climatizado) + "]");
+            temp = lector.nextLine();
+            if (!"".equals(temp)) {
+                climatizado = temp.equalsIgnoreCase("SI");
+            }
 
-            System.out.println("¿Cuántas puertas posee su vehiculo?");
-            numPuertas = lector.nextInt();
-            lector.nextLine();
+            System.out.println("¿Cuántos pasajeros entran enº su vehiculo? [" + numPasajeros + "]");
+            temp = lector.nextLine();
+            if (!"".equals(temp)) {
+                numPasajeros = Integer.parseInt(temp);
+            }
 
-            System.out.println("¿Tiene aire acondicionado? - Responde Si o No");
-            aireAcondicionado = lector.nextLine().equalsIgnoreCase("SI");
+            System.out.println("¿Cuántas puertas posee su vehiculo? [" + numPuertas + "]");
+            temp = lector.nextLine();
+            if (!"".equals(temp)) {
+                numPuertas = Integer.parseInt(temp);
+            }
+
+            System.out.println("¿Tiene aire acondicionado? - Responde Si o No [" + Utilidades.booleanToString(aireAcondicionado) + "]");
+            temp = lector.nextLine();
+            if (!"".equals(temp)) {
+                aireAcondicionado = temp.equalsIgnoreCase("SI");
+            }
         }
 
         Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, marca, modelo, numeroRuedas, profesional, "dni",
                 tipoCombustible, abs, caballos, cilindrada, almacenamiento, airbag, gps, descapotable,
                 climatizado, numPasajeros, numPuertas, aireAcondicionado, tipoVehiculoPro, tipoMoto);
-
-        gestora.guardarVehiculo(vehiculo);
-        gestora.guardarEnXML();
 
         gestora.guardarVehiculo(vehiculo);
         gestora.guardarEnXML();
