@@ -12,7 +12,6 @@ public class FichaReparacion {
     private String matricula;
     private Estado estado;
     private String comentario;
-    
 
     public int getIdFicha() {
         return idFicha;

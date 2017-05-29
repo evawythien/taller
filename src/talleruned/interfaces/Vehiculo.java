@@ -134,7 +134,7 @@ public class Vehiculo extends javax.swing.JFrame {
                 new Vehiculo().setVisible(true);
             }
         });
-    
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

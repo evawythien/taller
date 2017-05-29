@@ -19,7 +19,7 @@ public enum TipoMoto {
         return value;
     }
 
-    public static TipoMoto getVehiculoProfesionalByKey(int key) {
+    public static TipoMoto getTipoMotoByKey(int key) {
         for (TipoMoto t : TipoMoto.values()) {
             if (t.getKey() == key) {
                 return t;
