@@ -1,4 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_91" class="java.beans.XMLDecoder">
- <object class="java.util.HashMap"/>
+<java version="1.8.0_121" class="java.beans.XMLDecoder">
+ <object class="java.util.HashMap">
+  <void method="put">
+   <int>1</int>
+   <object class="talleruned.gestionInterna.FichaReparacion">
+    <void property="comentario">
+     <string>Pepe</string>
+    </void>
+    <void property="dniCliente">
+     <string>55555F</string>
+    </void>
+    <void property="dniEmpleado">
+     <string>1234</string>
+    </void>
+    <void property="estado">
+     <object class="java.lang.Enum" id="Estado0" method="valueOf">
+      <class>talleruned.gestionInterna.Estado</class>
+      <string>PENDIENTE</string>
+     </object>
+    </void>
+    <void property="fecha">
+     <object class="java.util.GregorianCalendar">
+      <void property="time">
+       <object class="java.util.Date">
+        <long>1496091178082</long>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="idFicha">
+     <int>1</int>
+    </void>
+    <void property="matricula">
+     <string>5555FFF</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <int>2</int>
+   <object class="talleruned.gestionInterna.FichaReparacion">
+    <void property="comentario">
+     <string>Pep</string>
+    </void>
+    <void property="dniCliente">
+     <string>55555F</string>
+    </void>
+    <void property="dniEmpleado">
+     <string>1234</string>
+    </void>
+    <void property="estado">
+     <object idref="Estado0"/>
+    </void>
+    <void property="fecha">
+     <object class="java.util.GregorianCalendar">
+      <void property="time">
+       <object class="java.util.Date">
+        <long>1496091230588</long>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="idFicha">
+     <int>2</int>
+    </void>
+    <void property="matricula">
+     <string>5555FFF</string>
+    </void>
+   </object>
+  </void>
+ </object>
 </java>

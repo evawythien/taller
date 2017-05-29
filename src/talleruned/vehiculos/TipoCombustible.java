@@ -2,7 +2,7 @@ package talleruned.vehiculos;
 
 public enum TipoCombustible {
 
-    OTRO(0, "Otro"), DIESEL(1, "Diesel"), ELECTRICO(3, "Eléctrico"), GASOLINA(2, "Gasolina"), HIBRIDO(4, "Hibrido");
+    OTRO(0, "Otro"), DIESEL(1, "Diesel"), ELECTRICO(2, "Eléctrico"), GASOLINA(3, "Gasolina"), HIBRIDO(4, "Hibrido");
 
     private final Integer key;
     private final String value;
