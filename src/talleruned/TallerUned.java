@@ -35,6 +35,7 @@ public class TallerUned {
         System.out.println("1.- Gestión de fichas");
         System.out.println("2.- Gestión de vehiculos");
         System.out.println("3.- Gestion de clientes");
+        System.out.println("4.- Búsquedas.");
         int opcion = lector.nextInt();
 
         switch (opcion) {
@@ -46,6 +47,9 @@ public class TallerUned {
                 break;
             case 3:
                 gestionClientes();
+                break;
+            case 4:
+                realizarBusquedas();
                 break;
         }
     }
@@ -100,6 +104,8 @@ public class TallerUned {
         System.out.println("1.- Mostrar listado de fichas.");
         System.out.println("2.- Modificar ficha.");
         System.out.println("3.- Mostrar fichas empleado.");
+        System.out.println("4.- Mostrar fichas en proceso.");
+        System.out.println("5.- Mostrar fichas entre las fechas:");
         int opcion = lector.nextInt();
 
         switch (opcion) {
@@ -111,6 +117,16 @@ public class TallerUned {
                 break;
             case 3:
                 System.out.println(gestora.getFichasReparacionPorEmpleado(getDniExistente()));
+                break;
+            case 4:
+                gestora.getFichasReparacionEnProceso();
+                break;
+            case 5:
+                System.out.println("-- Fecha inicial: (dd/mm/aaaa):");
+                String fechaInicio = lector.nextLine();
+                System.out.println("-- Fecha fin: (dd/mm/aaaa):");
+                String fechaFin = lector.nextLine();
+                gestora.getFichasReparacionEntreFechas(fechaInicio, fechaFin);
                 break;
         }
     }
@@ -545,5 +561,42 @@ public class TallerUned {
         } while (gestora.getCliente(dni) == null);
 
         return dni;
+    }
+
+    public static void realizarBusquedas() {
+
+        Scanner lector = new Scanner(System.in);
+        System.out.println("1.- Buscar vehiculo por matricula.");
+        System.out.println("1.- Buscar vehiculo por marca.");
+        System.out.println("2.- Buscar por estado ficha.");
+        System.out.println("3.- Buscar por tipo de combustible.");
+        int respuesta = lector.nextInt();
+        switch (respuesta) {
+            case 1:
+
+                break;
+            case 2:
+                System.out.println("Seleccione un número...");
+                for (MarcaVehiculo marca : MarcaVehiculo.values()) {
+                    System.out.println(marca.getKey() + ".- " + marca.getValue());
+                }
+                System.out.println(gestora.listadoVehiculosPorMarca(MarcaVehiculo.getMarcaByKey(lector.nextInt())));
+                break;
+            case 3:
+                System.out.println("Seleccione un número...");
+                for (Estado estado : Estado.values()) {
+                    System.out.println(estado.getKey() + ".- " + estado.getValue());
+                }
+                System.out.println(gestora.getFichasReparacionPorEstado(Estado.getEstadoByKey(lector.nextInt())));
+                break;
+            case 4:
+                System.out.println("Seleccione un número...");
+                for (TipoCombustible tipo : TipoCombustible.values()) {
+                    System.out.println(tipo.getKey() + ".- " + tipo.getValue());
+                }
+                System.out.println(gestora.listadoVehiculosPorCombustible(TipoCombustible.getCombustibleByKey(lector.nextInt())));
+                break;
+        }
+
     }
 }

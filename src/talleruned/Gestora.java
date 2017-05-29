@@ -11,6 +11,8 @@ import talleruned.gestionInterna.Mensaje;
 import talleruned.tareas.Tarea;
 import talleruned.usuarios.Cliente;
 import talleruned.usuarios.Empleado;
+import talleruned.vehiculos.MarcaVehiculo;
+import talleruned.vehiculos.TipoCombustible;
 import talleruned.vehiculos.Vehiculo;
 
 public class Gestora {
@@ -112,6 +114,37 @@ public class Gestora {
         return fichasReparacion;
     }
 
+    // Devuelve todas las fichas de reparación que se encuenten en un estado diferente a terminado5
+    public List<FichaReparacion> getFichasReparacionEnProceso() {
+        List<FichaReparacion> fichasReparacion = new ArrayList<>();
+        for (FichaReparacion ficha : fichas.values()) {
+            if (!ficha.getEstado().equals(Estado.TERMINADO)) {
+                fichasReparacion.add(ficha);
+            }
+        }
+        return fichasReparacion;
+    }
+
+    public List<FichaReparacion> getFichasReparacionPorEstado(Estado estado) {
+        List<FichaReparacion> fichasReparacion = new ArrayList<>();
+        for (FichaReparacion ficha : fichas.values()) {
+            if (ficha.getEstado().equals(estado)) {
+                fichasReparacion.add(ficha);
+            }
+        }
+        return fichasReparacion;
+    }
+
+    public List<FichaReparacion> getFichasReparacionEntreFechas(String fechaInicio, String fechaFin) {
+        List<FichaReparacion> fichasReparacion = new ArrayList<>();
+        for (FichaReparacion ficha : fichas.values()) {
+            if (ficha.getFecha().before(Utilidades.parseFecha(fechaFin)) && ficha.getFecha().after(Utilidades.parseFecha(fechaInicio))) {
+                fichasReparacion.add(ficha);
+            }
+        }
+        return fichasReparacion;
+    }
+
     public void guardarFichaReparacion(FichaReparacion ficha) {
         ficha.setIdFicha(++idUltimaFicha);
         fichas.put(ficha.getIdFicha(), ficha);
@@ -133,6 +166,26 @@ public class Gestora {
         return sb.toString();
     }
 
+    public String listadoVehiculosPorCombustible(TipoCombustible combustible) {
+        StringBuilder sb = new StringBuilder();
+        for (Vehiculo c : vehiculos.values()) {
+            if (c.getCombustible().equals(combustible)) {
+                sb.append(c).append(System.lineSeparator());
+            }
+        }
+        return sb.toString();
+    }
+
+    public String listadoVehiculosPorMarca(MarcaVehiculo marca) {
+        StringBuilder sb = new StringBuilder();
+        for (Vehiculo c : vehiculos.values()) {
+            if (c.getMarca().equals(marca)) {
+                sb.append(c).append(System.lineSeparator());
+            }
+        }
+        return sb.toString();
+    }
+
     public String listadoFichas() {
         StringBuilder sb = new StringBuilder();
         for (FichaReparacion c : fichas.values()) {
@@ -145,23 +198,11 @@ public class Gestora {
     public String listadoPromocionesActivas() {
         StringBuilder sb = new StringBuilder();
         for (Promocion c : promociones.values()) {
-            if (Utilidades.isBetweenDates(c.getFechaInicio(), c.getFechaFin())) {
+            if (Utilidades.isPromoBetweenDates(c.getFechaInicio(), c.getFechaFin())) {
                 sb.append(c).append(System.lineSeparator());
             }
         }
         return sb.toString();
-    }
-
-    public void listadoFichasEnProceso(Estado e) {
-
-    }
-
-    public void listadoFichasPeriodo(Date fechaInicio, Date fechaFin) {
-
-    }
-
-    public void listadoFichasMecanico(Empleado empleado) {
-
     }
 
 }
