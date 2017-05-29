@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_91" class="java.beans.XMLDecoder">
+<java version="1.8.0_121" class="java.beans.XMLDecoder">
  <object class="java.util.HashMap">
   <void method="put">
    <int>1</int>
    <object class="talleruned.gestionInterna.FichaReparacion">
     <void property="comentario">
-     <string>Ruido coche</string>
+     <string>Pepe</string>
     </void>
     <void property="dniCliente">
      <string>55555F</string>
@@ -23,7 +23,7 @@
      <object class="java.util.GregorianCalendar">
       <void property="time">
        <object class="java.util.Date">
-        <long>1496093169198</long>
+        <long>1496091178082</long>
        </object>
       </void>
      </object>
@@ -32,7 +32,7 @@
      <int>1</int>
     </void>
     <void property="matricula">
-     <string>4589ASD</string>
+     <string>5555FFF</string>
     </void>
    </object>
   </void>
@@ -40,7 +40,7 @@
    <int>2</int>
    <object class="talleruned.gestionInterna.FichaReparacion">
     <void property="comentario">
-     <string>Rueda pinchada</string>
+     <string>Pep</string>
     </void>
     <void property="dniCliente">
      <string>55555F</string>
@@ -55,7 +55,7 @@
      <object class="java.util.GregorianCalendar">
       <void property="time">
        <object class="java.util.Date">
-        <long>1496093439758</long>
+        <long>1496091230588</long>
        </object>
       </void>
      </object>
@@ -64,7 +64,7 @@
      <int>2</int>
     </void>
     <void property="matricula">
-     <string>4589ASD</string>
+     <string>5555FFF</string>
     </void>
    </object>
   </void>

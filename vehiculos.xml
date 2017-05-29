@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_91" class="java.beans.XMLDecoder">
+<java version="1.8.0_121" class="java.beans.XMLDecoder">
  <object class="java.util.HashMap">
+  <void method="put">
+   <string>5555FFF</string>
+   <object class="talleruned.vehiculos.VehiculoDosRuedas">
+    <void property="ABS">
+     <boolean>true</boolean>
+    </void>
+    <void property="GPS">
+     <boolean>true</boolean>
+    </void>
+    <void property="airbag">
+     <boolean>true</boolean>
+    </void>
+    <void property="almacenamiento">
+     <float>5.0</float>
+    </void>
+    <void property="caballos">
+     <float>5.0</float>
+    </void>
+    <void property="cilindrada">
+     <float>5.0</float>
+    </void>
+    <void property="combustible">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.TipoCombustible</class>
+      <string>DIESEL</string>
+     </object>
+    </void>
+    <void property="dni">
+     <string>55555F</string>
+    </void>
+    <void property="marca">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.MarcaVehiculo</class>
+      <string>AUDI</string>
+     </object>
+    </void>
+    <void property="matricula">
+     <string>5555FFF</string>
+    </void>
+    <void property="modelo">
+     <string>123</string>
+    </void>
+    <void property="numeroRuedas">
+     <int>2</int>
+    </void>
+    <void property="tipo">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.TipoMoto</class>
+      <string>CARRETERA</string>
+     </object>
+    </void>
+   </object>
+  </void>
   <void method="put">
    <string>4589ASD</string>
    <object class="talleruned.vehiculos.VehiculoCuatroRuedas">
