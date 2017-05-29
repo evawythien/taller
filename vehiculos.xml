@@ -1,52 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_91" class="java.beans.XMLDecoder">
-    <object class="java.util.HashMap">
-        <void method="put">
-            <string>4589ASD</string>
-            <object class="talleruned.vehiculos.VehiculoCuatroRuedas">
-                <void property="ABS">
-                    <boolean>false</boolean>
-                </void>
-                <void property="GPS">
-                    <boolean>false</boolean>
-                </void>
-                <void property="airbag">
-                    <boolean>false</boolean>
-                </void>
-                <void property="almacenamiento">
-                    <float>365.0</float>
-                </void>
-                <void property="caballos">
-                    <float>125.0</float>
-                </void>
-                <void property="cilindrada">
-                    <float>541.0</float>
-                </void>
-                <void property="combustible">
-                    <object class="java.lang.Enum" method="valueOf">
-                        <class>talleruned.vehiculos.TipoCombustible</class>
-                        <string>HIBRIDO</string>
-                    </object>
-                </void>
-                <void property="dni">
-                    <string>1111</string>
-                </void>
-                <void property="marca">
-                    <object class="java.lang.Enum" method="valueOf">
-                        <class>talleruned.vehiculos.MarcaVehiculo</class>
-                        <string>BMV</string>
-                    </object>
-                </void>
-                <void property="matricula">
-                    <string>4589ASD</string>
-                </void>
-                <void property="modelo">
-                    <string></string>
-                </void>
-                <void property="publico">
-                    <boolean>false</boolean>
-                </void>
-            </object>
-        </void>
-    </object>
+ <object class="java.util.HashMap">
+  <void method="put">
+   <string>4589ASD</string>
+   <object class="talleruned.vehiculos.VehiculoCuatroRuedas">
+    <void property="ABS">
+     <boolean>false</boolean>
+    </void>
+    <void property="GPS">
+     <boolean>false</boolean>
+    </void>
+    <void property="airbag">
+     <boolean>false</boolean>
+    </void>
+    <void property="almacenamiento">
+     <float>365.0</float>
+    </void>
+    <void property="caballos">
+     <float>125.0</float>
+    </void>
+    <void property="cilindrada">
+     <float>541.0</float>
+    </void>
+    <void property="combustible">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.TipoCombustible</class>
+      <string>HIBRIDO</string>
+     </object>
+    </void>
+    <void property="dni">
+     <string>1111</string>
+    </void>
+    <void property="marca">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.MarcaVehiculo</class>
+      <string>BMV</string>
+     </object>
+    </void>
+    <void property="matricula">
+     <string>4589ASD</string>
+    </void>
+    <void property="modelo">
+     <string></string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>2222DDD</string>
+   <object class="talleruned.vehiculos.VehiculoCuatroRuedas">
+    <void property="ABS">
+     <boolean>true</boolean>
+    </void>
+    <void property="GPS">
+     <boolean>true</boolean>
+    </void>
+    <void property="airbag">
+     <boolean>true</boolean>
+    </void>
+    <void property="aireAcondicionado">
+     <boolean>true</boolean>
+    </void>
+    <void property="almacenamiento">
+     <float>5555.0</float>
+    </void>
+    <void property="caballos">
+     <float>12333.0</float>
+    </void>
+    <void property="cilindrada">
+     <float>12222.0</float>
+    </void>
+    <void property="climatizado">
+     <boolean>true</boolean>
+    </void>
+    <void property="combustible">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.TipoCombustible</class>
+      <string>ELECTRICO</string>
+     </object>
+    </void>
+    <void property="descapotable">
+     <boolean>true</boolean>
+    </void>
+    <void property="dni">
+     <string>55555F</string>
+    </void>
+    <void property="marca">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.MarcaVehiculo</class>
+      <string>SKODA</string>
+     </object>
+    </void>
+    <void property="matricula">
+     <string>2222DDD</string>
+    </void>
+    <void property="modelo">
+     <string>modelo nuevo</string>
+    </void>
+    <void property="numPasajeros">
+     <int>5</int>
+    </void>
+    <void property="numPuertas">
+     <int>4</int>
+    </void>
+   </object>
+  </void>
+ </object>
 </java>

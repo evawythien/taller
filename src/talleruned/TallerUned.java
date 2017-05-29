@@ -11,17 +11,17 @@ import talleruned.vehiculos.TipoCombustible;
 import talleruned.vehiculos.TipoMoto;
 import talleruned.vehiculos.TipoVehiculoProfesional;
 import talleruned.vehiculos.Vehiculo;
+import talleruned.vehiculos.VehiculoProfesional;
 
 public class TallerUned {
 
     private static final Gestora gestora = new Gestora();
     private static Empleado empleado;
-    //Scanner lector = new Scanner(System.in);
+    private static Scanner lector = new Scanner(System.in);
 
     public static void main(String[] args) {
 
         gestora.obtenerDeXML();
-        Scanner lector = new Scanner(System.in);
 
         System.out.println("Bienvenidos al taller ");
         String identificador;
@@ -55,8 +55,6 @@ public class TallerUned {
 
     public static void gestionClientes() {
 
-        Scanner lector = new Scanner(System.in);
-
         System.out.println("¿Que quiere hacer?:");
         System.out.println("1.- Añadir un nuevo cliente");
         System.out.println("2.- Modificar un cliente existente");
@@ -79,13 +77,12 @@ public class TallerUned {
 
     public static void gestionVehiculos() {
 
-        Scanner lector = new Scanner(System.in);
-
         System.out.println("¿Que quiere hacer?:");
         System.out.println("1.- Añadir un nuevo vehículo.");
         System.out.println("2.- Modificar un vehiculo existente.");
         System.out.println("3.- Ver listado de vehiculos.");
         int opcion = lector.nextInt();
+        lector.nextLine();
 
         switch (opcion) {
             case 1:
@@ -101,8 +98,6 @@ public class TallerUned {
     }
 
     public static void gestionFichas() {
-
-        Scanner lector = new Scanner(System.in);
 
         System.out.println("¿Que quiere hacer?:");
         System.out.println("1.- Mostrar listado de fichas.");
@@ -137,7 +132,6 @@ public class TallerUned {
 
     public static void pedirDatosUsuario() {
 
-        Scanner lector = new Scanner(System.in);
         Cliente cliente = new Cliente();
         System.out.println("A continuación le vamos a pedir unos datos para la inscripción del taller");
         System.out.println("-------------------------------------------------------------------------");
@@ -178,7 +172,6 @@ public class TallerUned {
 
     public static void editarCliente() {
 
-        Scanner lector = new Scanner(System.in);
         Cliente cliente;
 
         String identificador;
@@ -242,8 +235,6 @@ public class TallerUned {
             return;
         }
 
-        Scanner lector = new Scanner(System.in);
-
         System.out.println("¿Cuántas ruedas posee su vehiculo?");
         int numeroRuedas = lector.nextInt();
         lector.nextLine();
@@ -302,6 +293,149 @@ public class TallerUned {
         float cilindrada = lector.nextFloat();
         lector.nextLine();
 
+        System.out.println("¿Almacenamiento?");
+        float almacenamiento = lector.nextFloat();
+        lector.nextLine();
+
+        System.out.println("¿Tiene airbag? - Responde Si o No");
+        Boolean airbag = lector.nextLine().equalsIgnoreCase("SI");
+
+        System.out.println("¿Tiene GPS integrado? - Responde Si o No");
+        Boolean gps = lector.nextLine().equalsIgnoreCase("SI");
+
+        TipoMoto tipoMoto = TipoMoto.OTRO;
+
+        Boolean descapotable = false;
+        Boolean climatizado = false;
+        int numPasajeros = 0;
+        int numPuertas = 0;
+        Boolean aireAcondicionado = false;
+
+        if (numeroRuedas == 2) {
+
+            System.out.println("¿De que tipo es? - Seleccione un número");
+            for (TipoMoto tipo : TipoMoto.values()) {
+                System.out.println(tipo.getKey() + ".- " + tipo.getValue());
+            }
+            tipoMoto = TipoMoto.getTipoMotoByKey(lector.nextInt());
+            lector.nextLine();
+
+        } else if (numeroRuedas == 4) {
+
+            System.out.println("¿Es descapotable? - Responde Si o No");
+            descapotable = lector.nextLine().equalsIgnoreCase("SI");
+
+            System.out.println("¿Es climatizado? - Responde Si o No");
+            climatizado = lector.nextLine().equalsIgnoreCase("SI");
+
+            System.out.println("¿Cuántos pasajeros entran enº su vehiculo?");
+            numPasajeros = lector.nextInt();
+            lector.nextLine();
+
+            System.out.println("¿Cuántas puertas posee su vehiculo?");
+            numPuertas = lector.nextInt();
+            lector.nextLine();
+
+            System.out.println("¿Tiene aire acondicionado? - Responde Si o No");
+            aireAcondicionado = lector.nextLine().equalsIgnoreCase("SI");
+        }
+
+        Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, marca, modelo, numeroRuedas, profesional, dni,
+                tipoCombustible, abs, caballos, cilindrada, almacenamiento, airbag, gps, descapotable,
+                climatizado, numPasajeros, numPuertas, aireAcondicionado, tipoVehiculoPro, tipoMoto);
+
+        gestora.guardarVehiculo(vehiculo);
+        gestora.guardarEnXML();
+    }
+
+    public static void editarCoche() {
+
+        Vehiculo vehiculoOriginal = null;
+        String temp = null;
+
+        String matricula;
+        do {
+            System.out.println("1.- Introduzca una matricula para modificar:");
+            matricula = lector.nextLine();
+            if ("".equals(matricula)) {
+                return;
+            }
+        } while ((vehiculoOriginal = gestora.getVehiculo(matricula)) == null);
+
+        int numeroRuedas = vehiculoOriginal.getNumeroRuedas();
+        System.out.println("¿Cuántas ruedas posee su vehiculo? [" + numeroRuedas + "]");
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            numeroRuedas = Integer.parseInt(temp);
+        }
+
+        Boolean profesional = false;
+        TipoVehiculoProfesional tipoVehiculoPro = TipoVehiculoProfesional.OTRO;
+
+        if (numeroRuedas == 4) {
+            System.out.println("¿Pertenece a un servicio publico? - Responde Si o No");
+            profesional = lector.nextLine().equalsIgnoreCase("SI");
+
+            if (profesional) {
+
+                VehiculoProfesional vp = vehiculoOriginal instanceof VehiculoProfesional ? (VehiculoProfesional) vehiculoOriginal : null;
+                if (vp != null) {
+                    tipoVehiculoPro = vp.getTipo();
+                }
+
+                System.out.println("¿De que tipo es? - Seleccione un número [" + tipoVehiculoPro.getKey() + ".- " + tipoVehiculoPro.getValue() + "]");
+                for (TipoVehiculoProfesional tipo : TipoVehiculoProfesional.values()) {
+                    System.out.println(tipo.getKey() + ".- " + tipo.getValue());
+                }
+                temp = lector.nextLine();
+                if (!"".equals(temp)) {
+                    tipoVehiculoPro = TipoVehiculoProfesional.getVehiculoProfesionalByKey(Integer.parseInt(temp));
+                }
+            }
+        }
+
+        MarcaVehiculo marca = vehiculoOriginal.getMarca();
+        System.out.println("¿Cual es la marca del vehiculo? - Seleccione un número [" + marca.getKey() + ".- " + marca.getValue() + "]");
+        for (MarcaVehiculo m : MarcaVehiculo.values()) {
+            System.out.println(m.getKey() + ".- " + m.getValue());
+        }
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            marca = MarcaVehiculo.getMarcaByKey(Integer.parseInt(temp));
+        }
+
+        String modelo = null;
+        System.out.println("¿Cual es el modelo? [" + modelo + "]");
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            modelo = temp;
+        }
+
+        TipoCombustible tipoCombustible = vehiculoOriginal.getCombustible();
+        System.out.println("¿Que tipo de combustible utiliza? - Seleccione un número [" + tipoCombustible.getKey() + ".- " + tipoCombustible.getValue() + "]");
+        for (TipoCombustible combustible : TipoCombustible.values()) {
+            System.out.println(combustible.getKey() + ".- " + combustible.getValue());
+        }
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            tipoCombustible = TipoCombustible.getCombustibleByKey(Integer.parseInt(temp));
+        }
+
+        Boolean abs = vehiculoOriginal.getABS();
+        System.out.println("¿Tiene ABS? - Responde Si o No [" + abs + "]");
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            abs = temp.equalsIgnoreCase("SI");
+        }
+
+        System.out.println("¿Caballos?");
+        float caballos = lector.nextFloat();
+        lector.nextLine();
+
+        System.out.println("¿Cilindrada?");
+        float cilindrada = lector.nextFloat();
+        lector.nextLine();
+
         System.out.println("¿Almacenamiento");
         float almacenamiento = lector.nextFloat();
         lector.nextLine();
@@ -349,80 +483,9 @@ public class TallerUned {
             aireAcondicionado = lector.nextLine().equalsIgnoreCase("SI");
         }
 
-        Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, marca, dni, numeroRuedas, profesional, dni, tipoCombustible, abs,
-                caballos, cilindrada, almacenamiento, airbag, gps, descapotable, climatizado, numPasajeros, numPuertas,
-                aireAcondicionado, tipoVehiculoPro, tipoMoto);
-
-        gestora.guardarVehiculo(vehiculo);
-        gestora.guardarEnXML();
-    }
-
-    public static void editarCoche() {
-
-        Scanner lector = new Scanner(System.in);
-        Vehiculo vehiculo = null;
-
-        String matricula;
-        do {
-            System.out.println("1.- Introduzca una matricula para modificar:");
-            matricula = lector.nextLine();
-            if ("".equals(matricula)) {
-                return;
-            }
-        } while ((vehiculo = gestora.getVehiculo(matricula)) == null);
-
-        String temp;
-        System.out.println("Marca [" + vehiculo.getMarca() + "]: - Seleccione un número");
-        for (MarcaVehiculo marca : MarcaVehiculo.values()) {
-            System.out.println(marca.getKey() + ".- " + marca.getValue());
-        }
-        temp = lector.nextLine();
-        if (!"".equals(temp)) {
-            vehiculo.setMarca(MarcaVehiculo.getMarcaByKey(Integer.parseInt(temp)));
-        }
-
-        System.out.println("Modelo [" + vehiculo.getModelo() + "]:");
-        temp = lector.nextLine();
-        if (!"".equals(temp)) {
-            vehiculo.setModelo(temp);
-        }
-
-        System.out.println("Combustible [" + vehiculo.getCombustible() + "]: - Seleccione un número");
-        for (TipoCombustible combustible : TipoCombustible.values()) {
-            System.out.println(combustible.getKey() + ".- " + combustible.getValue());
-        }
-        vehiculo.setCombustible(TipoCombustible.getCombustibleByKey(Integer.parseInt(temp)));
-
-        System.out.println("ABS [" + vehiculo.getABS() + "]: - Responde Si o No");
-        temp = lector.nextLine();
-        if (!"".equals(temp)) {
-            vehiculo.setABS(temp.equalsIgnoreCase("SI"));
-        }
-
-        System.out.println("Caballos [" + vehiculo.getCaballos() + "]:");
-        if (!"".equals(temp)) {
-            vehiculo.setCaballos(Integer.parseInt(temp));
-        }
-
-        System.out.println("Cilindrada [" + vehiculo.getCilindrada() + "]:");
-        if (!"".equals(temp)) {
-            vehiculo.setCilindrada(Integer.parseInt(temp));
-        }
-
-        System.out.println("Almacenamiento [" + vehiculo.getAlmacenamiento() + "]:");
-        if (!"".equals(temp)) {
-            vehiculo.setAlmacenamiento(Integer.parseInt(temp));
-        }
-
-        System.out.println("Airbag [" + vehiculo.getAirbag() + "]: - Responde Si o No");
-        if (!"".equals(temp)) {
-            vehiculo.setAirbag(temp.equalsIgnoreCase("SI"));
-        }
-
-        System.out.println("GPS [" + vehiculo.getGPS() + "]: - Responde Si o No");
-        if (!"".equals(temp)) {
-            vehiculo.setGPS(temp.equalsIgnoreCase("SI"));
-        }
+        Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, marca, modelo, numeroRuedas, profesional, "dni",
+                tipoCombustible, abs, caballos, cilindrada, almacenamiento, airbag, gps, descapotable,
+                climatizado, numPasajeros, numPuertas, aireAcondicionado, tipoVehiculoPro, tipoMoto);
 
         gestora.guardarVehiculo(vehiculo);
         gestora.guardarEnXML();
@@ -430,7 +493,6 @@ public class TallerUned {
 
     public static void pedirDatosFichaReparación(String matricula, String dni, String dniEmpleado) {
 
-        Scanner lector = new Scanner(System.in);
         FichaReparacion ficha = new FichaReparacion();
 
         System.out.println("Motivo de la visita:");
@@ -447,13 +509,10 @@ public class TallerUned {
 
     public static void editarFicha() {
 
-        Scanner lector = new Scanner(System.in);
-
     }
 
     public static String getDniExistente() {
 
-        Scanner lector = new Scanner(System.in);
         String dni;
 
         do {
@@ -467,7 +526,8 @@ public class TallerUned {
     public static void realizarBusquedas() {
 
         Scanner lector = new Scanner(System.in);
-        System.out.println("1.- Buscar por matricula.");
+        System.out.println("1.- Buscar vehiculo por matricula.");
+        System.out.println("1.- Buscar vehiculo por marca.");
         System.out.println("2.- Buscar por estado ficha.");
         System.out.println("3.- Buscar por tipo de combustible.");
         int respuesta = lector.nextInt();
@@ -477,12 +537,19 @@ public class TallerUned {
                 break;
             case 2:
                 System.out.println("Seleccione un número...");
+                for (MarcaVehiculo marca : MarcaVehiculo.values()) {
+                    System.out.println(marca.getKey() + ".- " + marca.getValue());
+                }
+                System.out.println(gestora.listadoVehiculosPorMarca(MarcaVehiculo.getMarcaByKey(lector.nextInt())));
+                break;
+            case 3:
+                System.out.println("Seleccione un número...");
                 for (Estado estado : Estado.values()) {
                     System.out.println(estado.getKey() + ".- " + estado.getValue());
                 }
                 System.out.println(gestora.getFichasReparacionPorEstado(Estado.getEstadoByKey(lector.nextInt())));
                 break;
-            case 3:
+            case 4:
                 System.out.println("Seleccione un número...");
                 for (TipoCombustible tipo : TipoCombustible.values()) {
                     System.out.println(tipo.getKey() + ".- " + tipo.getValue());

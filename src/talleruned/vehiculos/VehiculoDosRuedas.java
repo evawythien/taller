@@ -4,6 +4,10 @@ public class VehiculoDosRuedas extends Vehiculo {
 
     private TipoMoto tipo;
 
+    public VehiculoDosRuedas() {
+        this.setNumeroRuedas(4);
+    }
+
     public VehiculoDosRuedas(TipoMoto tipo) {
         this.tipo = tipo;
     }

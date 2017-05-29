@@ -11,11 +11,12 @@ import talleruned.gestionInterna.Mensaje;
 import talleruned.tareas.Tarea;
 import talleruned.usuarios.Cliente;
 import talleruned.usuarios.Empleado;
+import talleruned.vehiculos.MarcaVehiculo;
 import talleruned.vehiculos.TipoCombustible;
 import talleruned.vehiculos.Vehiculo;
 
 public class Gestora {
-    
+
     private final HashMap<String, Cliente> clientes;
     private HashMap<String, Vehiculo> vehiculos;
     private HashMap<Integer, FichaReparacion> fichas;
@@ -24,9 +25,9 @@ public class Gestora {
     private HashMap<Integer, Mensaje> mensajes;
     private HashMap<Integer, Tarea> tareas;
     private int idUltimaFicha;
-    
+
     public Gestora() {
-        
+
         this.clientes = new HashMap<>();
         this.vehiculos = new HashMap<>();
         this.fichas = new HashMap<>();
@@ -59,26 +60,26 @@ public class Gestora {
         this.mensajes.put(4, new Mensaje(4, 4, "¿Le gustaría aceptar a la promoción actual de 'Promoción cambio de neumaticos'?"));
         this.mensajes.put(5, new Mensaje(5, 5, "¿Le gustaría aceptar a la promoción actual de 'Promoción cambio de filtro'?"));
         this.mensajes.put(6, new Mensaje(6, 6, "¿Le gustaría aceptar a la promoción actual de 'Promoción cambio de aceite'?"));
-        
+
     }
-    
+
     public void guardarCliente(Cliente cliente) {
         clientes.put(cliente.getDni(), cliente);
     }
-    
+
     public Cliente getCliente(String dni) {
         return clientes.get(dni);
     }
-    
+
     public void guardarEnXML() {
-        
+
         GestoraPersistencia.escribirXML("clientes.xml", clientes);
         GestoraPersistencia.escribirXML("vehiculos.xml", vehiculos);
         GestoraPersistencia.escribirXML("fichas.xml", fichas);
     }
-    
+
     public void obtenerDeXML() {
-        
+
         clientes.putAll(GestoraPersistencia.leerEnXML("clientes.xml"));
         vehiculos.putAll(GestoraPersistencia.leerEnXML("vehiculos.xml"));
         fichas.putAll(GestoraPersistencia.leerEnXML("fichas.xml"));
@@ -86,23 +87,23 @@ public class Gestora {
             idUltimaFicha = Collections.max(fichas.keySet());
         }
     }
-    
+
     public Empleado getEmpleado(String dni) {
         return empleados.get(dni);
     }
-    
+
     public void guardarVehiculo(Vehiculo vehiculo) {
         vehiculos.put(vehiculo.getMatricula(), vehiculo);
     }
-    
+
     public Vehiculo getVehiculo(String matricula) {
         return vehiculos.get(matricula);
     }
-    
+
     public FichaReparacion getFichaReparacion(int idFicha) {
         return fichas.get(idFicha);
     }
-    
+
     public List<FichaReparacion> getFichasReparacionPorEmpleado(String dniEmpleado) {
         List<FichaReparacion> fichasReparacion = new ArrayList<>();
         for (FichaReparacion ficha : fichas.values()) {
@@ -123,7 +124,7 @@ public class Gestora {
         }
         return fichasReparacion;
     }
-    
+
     public List<FichaReparacion> getFichasReparacionPorEstado(Estado estado) {
         List<FichaReparacion> fichasReparacion = new ArrayList<>();
         for (FichaReparacion ficha : fichas.values()) {
@@ -133,7 +134,7 @@ public class Gestora {
         }
         return fichasReparacion;
     }
-    
+
     public List<FichaReparacion> getFichasReparacionEntreFechas(String fechaInicio, String fechaFin) {
         List<FichaReparacion> fichasReparacion = new ArrayList<>();
         for (FichaReparacion ficha : fichas.values()) {
@@ -143,12 +144,12 @@ public class Gestora {
         }
         return fichasReparacion;
     }
-    
+
     public void guardarFichaReparacion(FichaReparacion ficha) {
         ficha.setIdFicha(++idUltimaFicha);
         fichas.put(ficha.getIdFicha(), ficha);
     }
-    
+
     public String listadoClientes() {
         StringBuilder sb = new StringBuilder();
         for (Cliente c : clientes.values()) {
@@ -156,7 +157,7 @@ public class Gestora {
         }
         return sb.toString();
     }
-    
+
     public String listadoVehiculos() {
         StringBuilder sb = new StringBuilder();
         for (Vehiculo c : vehiculos.values()) {
@@ -164,7 +165,7 @@ public class Gestora {
         }
         return sb.toString();
     }
-    
+
     public String listadoVehiculosPorCombustible(TipoCombustible combustible) {
         StringBuilder sb = new StringBuilder();
         for (Vehiculo c : vehiculos.values()) {
@@ -174,7 +175,17 @@ public class Gestora {
         }
         return sb.toString();
     }
-    
+
+    public String listadoVehiculosPorMarca(MarcaVehiculo marca) {
+        StringBuilder sb = new StringBuilder();
+        for (Vehiculo c : vehiculos.values()) {
+            if (c.getMarca().equals(marca)) {
+                sb.append(c).append(System.lineSeparator());
+            }
+        }
+        return sb.toString();
+    }
+
     public String listadoFichas() {
         StringBuilder sb = new StringBuilder();
         for (FichaReparacion c : fichas.values()) {
@@ -193,5 +204,5 @@ public class Gestora {
         }
         return sb.toString();
     }
-    
+
 }
