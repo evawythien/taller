@@ -330,7 +330,6 @@ public class TallerUned {
 
             System.out.println("¿Tiene aire acondicionado? - Responde Si o No");
             aireAcondicionado = lector.nextLine().equalsIgnoreCase("SI");
-
         }
 
         Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, marca, dni, numeroRuedas, profesional, dni, tipoCombustible, abs,
