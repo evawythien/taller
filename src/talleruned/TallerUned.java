@@ -130,7 +130,7 @@ public class TallerUned {
                 editarFicha();
                 break;
             case 3:
-                System.out.println(gestora.getFichasReparacionPorEmpleado(getDniExistente()));
+                System.out.println(gestora.getFichasReparacionPorEmpleado(empleado.getDni()));
                 break;
             case 4:
                 gestora.getFichasReparacionEnProceso();
@@ -258,7 +258,7 @@ public class TallerUned {
 
         if (matricula == null) {
             do {
-                System.out.println("¿Cual es la matricula del vehiculo?");
+                System.out.println("¿Cual es la matricula del vehiculo? (formato 1234ASD)");
                 matricula = lector.nextLine();
                 if ("".equals(matricula)) {
                     return;
@@ -373,7 +373,7 @@ public class TallerUned {
 
         String matricula;
         do {
-            System.out.println("1.- Introduzca una matricula para modificar:");
+            System.out.println("1.- Introduzca una matricula para modificar: (formato 1234ASD)");
             matricula = lector.nextLine();
             if ("".equals(matricula)) {
                 return;

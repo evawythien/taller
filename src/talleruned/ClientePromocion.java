@@ -8,5 +8,4 @@ public class ClientePromocion {
     protected String dni; // Dni cliente 		
     protected Boolean ofertada;
     protected Calendar fechaOfertada;
-
 }

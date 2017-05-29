@@ -76,7 +76,7 @@
      <float>541.0</float>
     </void>
     <void property="combustible">
-     <object class="java.lang.Enum" method="valueOf">
+     <object class="java.lang.Enum" id="TipoCombustible0" method="valueOf">
       <class>talleruned.vehiculos.TipoCombustible</class>
       <string>HIBRIDO</string>
      </object>
@@ -198,6 +198,62 @@
     </void>
     <void property="numPuertas">
      <int>4</int>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>1234WWW</string>
+   <object class="talleruned.vehiculos.VehiculoCuatroRuedas">
+    <void property="ABS">
+     <boolean>false</boolean>
+    </void>
+    <void property="GPS">
+     <boolean>false</boolean>
+    </void>
+    <void property="airbag">
+     <boolean>false</boolean>
+    </void>
+    <void property="aireAcondicionado">
+     <boolean>false</boolean>
+    </void>
+    <void property="almacenamiento">
+     <float>234.0</float>
+    </void>
+    <void property="caballos">
+     <float>123.0</float>
+    </void>
+    <void property="cilindrada">
+     <float>23423.0</float>
+    </void>
+    <void property="climatizado">
+     <boolean>false</boolean>
+    </void>
+    <void property="combustible">
+     <object idref="TipoCombustible0"/>
+    </void>
+    <void property="descapotable">
+     <boolean>false</boolean>
+    </void>
+    <void property="dni">
+     <string>55555F</string>
+    </void>
+    <void property="marca">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>talleruned.vehiculos.MarcaVehiculo</class>
+      <string>VOLKSWAGEN</string>
+     </object>
+    </void>
+    <void property="matricula">
+     <string>1234WWW</string>
+    </void>
+    <void property="modelo">
+     <string>modeeeelooo</string>
+    </void>
+    <void property="numPasajeros">
+     <int>5</int>
+    </void>
+    <void property="numPuertas">
+     <int>5</int>
     </void>
    </object>
   </void>
