@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package talleruned.vehiculos;
 
 /**
- *
- * @author Oscar
+ *  Una factoría sirve para esconder la implementación y construcción de objetos
+ *  de una factoría de clases determinada
  */
 public class FactoriaVehiculos {
 

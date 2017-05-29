@@ -5,13 +5,11 @@ import java.util.Scanner;
 import talleruned.usuarios.Cliente;
 import talleruned.usuarios.Empleado;
 import talleruned.vehiculos.FactoriaVehiculos;
-import talleruned.vehiculos.VehiculoCuatroRuedas;
 import talleruned.vehiculos.MarcaVehiculo;
 import talleruned.vehiculos.TipoCombustible;
 import talleruned.vehiculos.TipoMoto;
 import talleruned.vehiculos.TipoVehiculoProfesional;
 import talleruned.vehiculos.Vehiculo;
-import talleruned.vehiculos.VehiculoDosRuedas;
 
 public class TallerUned {
 
@@ -205,13 +203,13 @@ public class TallerUned {
             cliente.setTlfMovil(Integer.parseInt(temp));
         }
 
-        System.out.println("7.- Teléfono fijo [" + cliente.getTlfFijo()+ "]:");
+        System.out.println("7.- Teléfono fijo [" + cliente.getTlfFijo() + "]:");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             cliente.setTlfFijo(Integer.parseInt(temp));
         }
 
-        System.out.println("8.- Fecha de nacimiento(dd/mm/aaaa) [" + Utilidades.formatFecha(cliente.getFechaNacimiento())+ "]:");
+        System.out.println("8.- Fecha de nacimiento(dd/mm/aaaa) [" + Utilidades.formatFecha(cliente.getFechaNacimiento()) + "]:");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             cliente.setFechaNacimiento(Utilidades.parseFecha(temp));
@@ -233,8 +231,6 @@ public class TallerUned {
         int numeroRuedas = lector.nextInt();
         lector.nextLine();
 
-        vehiculo.setDni(dni);
-
         String matricula;
         do {
             System.out.println("¿Cual es la matricula del vehiculo?");
@@ -244,20 +240,18 @@ public class TallerUned {
             }
         } while (!ValidacionDatos.comprobarMatricula(matricula));
 
-        vehiculo.setMatricula(matricula);
-
         System.out.println("¿Cual es la marca del vehiculo? - Seleccione un número");
         for (MarcaVehiculo marca : MarcaVehiculo.values()) {
             System.out.println(marca.getKey() + ".- " + marca.getValue());
         }
-        vehiculo.setMarca(MarcaVehiculo.getMarcaByKey(lector.nextInt()));
+        MarcaVehiculo marca = MarcaVehiculo.getMarcaByKey(lector.nextInt());
         lector.nextLine();
 
         System.out.println("¿Cual es el modelo?");
-        vehiculo.setModelo(lector.nextLine());
+        String modelo = lector.nextLine();
 
-        System.out.println("¿Pertenece a un servicio publico? - Responde Si o No");
-        vehiculo.setPublico(lector.nextLine().equalsIgnoreCase("SI"));
+//        System.out.println("¿Pertenece a un servicio publico? - Responde Si o No");
+//        vehiculo.setPublico(lector.nextLine().equalsIgnoreCase("SI"));
 
         System.out.println("¿Que tipo de combustible utuliza? - Seleccione un número");
         for (TipoCombustible combustible : TipoCombustible.values()) {
@@ -310,7 +304,7 @@ public class TallerUned {
         } while ((vehiculo = gestora.getVehiculo(matricula)) == null);
 
         String temp;
-        System.out.println("Marca [" + vehiculo.getMarca()+ "]: - Seleccione un número");
+        System.out.println("Marca [" + vehiculo.getMarca() + "]: - Seleccione un número");
         for (MarcaVehiculo marca : MarcaVehiculo.values()) {
             System.out.println(marca.getKey() + ".- " + marca.getValue());
         }
@@ -319,7 +313,7 @@ public class TallerUned {
             vehiculo.setMarca(MarcaVehiculo.getMarcaByKey(Integer.parseInt(temp)));
         }
 
-        System.out.println("Modelo [" + vehiculo.getModelo()+ "]:");
+        System.out.println("Modelo [" + vehiculo.getModelo() + "]:");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             vehiculo.setModelo(temp);
@@ -331,39 +325,39 @@ public class TallerUned {
             vehiculo.setPublico(temp.equalsIgnoreCase("SI"));
         }
 
-        System.out.println("Combustible [" + vehiculo.getCombustible()+ "]: - Seleccione un número");
+        System.out.println("Combustible [" + vehiculo.getCombustible() + "]: - Seleccione un número");
         for (TipoCombustible combustible : TipoCombustible.values()) {
             System.out.println(combustible.getKey() + ".- " + combustible.getValue());
         }
         vehiculo.setCombustible(TipoCombustible.getCombustibleByKey(Integer.parseInt(temp)));
 
-        System.out.println("ABS [" + vehiculo.getABS()+ "]: - Responde Si o No");
+        System.out.println("ABS [" + vehiculo.getABS() + "]: - Responde Si o No");
         temp = lector.nextLine();
         if (!"".equals(temp)) {
             vehiculo.setABS(temp.equalsIgnoreCase("SI"));
         }
 
-        System.out.println("Caballos [" + vehiculo.getCaballos()+ "]:");
+        System.out.println("Caballos [" + vehiculo.getCaballos() + "]:");
         if (!"".equals(temp)) {
             vehiculo.setCaballos(Integer.parseInt(temp));
         }
 
-        System.out.println("Cilindrada [" + vehiculo.getCilindrada()+ "]:");
+        System.out.println("Cilindrada [" + vehiculo.getCilindrada() + "]:");
         if (!"".equals(temp)) {
             vehiculo.setCilindrada(Integer.parseInt(temp));
         }
 
-        System.out.println("Almacenamiento [" + vehiculo.getAlmacenamiento()+ "]:");
+        System.out.println("Almacenamiento [" + vehiculo.getAlmacenamiento() + "]:");
         if (!"".equals(temp)) {
             vehiculo.setAlmacenamiento(Integer.parseInt(temp));
         }
 
-        System.out.println("Airbag [" + vehiculo.getAirbag()+ "]: - Responde Si o No");
+        System.out.println("Airbag [" + vehiculo.getAirbag() + "]: - Responde Si o No");
         if (!"".equals(temp)) {
             vehiculo.setAirbag(temp.equalsIgnoreCase("SI"));
         }
 
-        System.out.println("GPS [" + vehiculo.getGPS()+ "]: - Responde Si o No");
+        System.out.println("GPS [" + vehiculo.getGPS() + "]: - Responde Si o No");
         if (!"".equals(temp)) {
             vehiculo.setGPS(temp.equalsIgnoreCase("SI"));
         }
