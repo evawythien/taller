@@ -527,13 +527,22 @@ public class TallerUned {
 
         Scanner lector = new Scanner(System.in);
         System.out.println("1.- Buscar vehiculo por matricula.");
-        System.out.println("1.- Buscar vehiculo por marca.");
-        System.out.println("2.- Buscar por estado ficha.");
-        System.out.println("3.- Buscar por tipo de combustible.");
+        System.out.println("2.- Buscar vehiculo por marca.");
+        System.out.println("3.- Buscar por estado ficha.");
+        System.out.println("4.- Buscar por tipo de combustible.");
+        System.out.println("5.- Buscar vehiculos por cliente");
         int respuesta = lector.nextInt();
         switch (respuesta) {
             case 1:
-
+                String matricula;
+                do {
+                    System.out.println("Introduce una matricula:");
+                    matricula = lector.nextLine();
+                    if ("".equals(matricula)) {
+                        return;
+                    }
+                } while (!ValidacionDatos.comprobarMatricula(matricula));
+                System.out.println(gestora.getVehiculo(matricula));
                 break;
             case 2:
                 System.out.println("Seleccione un número...");
@@ -555,6 +564,10 @@ public class TallerUned {
                     System.out.println(tipo.getKey() + ".- " + tipo.getValue());
                 }
                 System.out.println(gestora.listadoVehiculosPorCombustible(TipoCombustible.getCombustibleByKey(lector.nextInt())));
+                break;
+            case 5:
+                System.out.println("Introduce un dni:");
+                System.out.println(gestora.listadoVehiculosCliente(lector.nextLine()));
                 break;
         }
 

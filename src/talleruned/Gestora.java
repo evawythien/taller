@@ -166,6 +166,16 @@ public class Gestora {
         return sb.toString();
     }
 
+    public String listadoVehiculosCliente(String dni) {
+        StringBuilder sb = new StringBuilder();
+        for (Vehiculo c : vehiculos.values()) {
+            if (c.getDni().equals(dni)) {
+                sb.append(c).append(System.lineSeparator());
+            }
+        }
+        return sb.toString();
+    }
+
     public String listadoVehiculosPorCombustible(TipoCombustible combustible) {
         StringBuilder sb = new StringBuilder();
         for (Vehiculo c : vehiculos.values()) {
