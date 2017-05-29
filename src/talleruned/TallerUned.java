@@ -36,8 +36,10 @@ public class TallerUned {
             System.out.println("1.- Gestión de fichas");
             System.out.println("2.- Gestión de vehiculos");
             System.out.println("3.- Gestion de clientes");
-            System.out.println("4.- Búsquedas.");
+            System.out.println("4.- Búsquedas");
+            System.out.println("5.- Crear fichas");
             int opcion = lector.nextInt();
+            lector.nextLine();
 
             switch (opcion) {
                 case 0:
@@ -115,6 +117,7 @@ public class TallerUned {
         System.out.println("4.- Mostrar fichas en proceso.");
         System.out.println("5.- Mostrar fichas entre las fechas:");
         int opcion = lector.nextInt();
+        lector.nextLine();
 
         switch (opcion) {
             case 1:
@@ -549,6 +552,7 @@ public class TallerUned {
         System.out.println("Introduce el dni del cliente:");
         dni = lector.nextLine();
         if (gestora.getCliente(dni) == null) {
+            System.out.println("Nuevo cliente");
             pedirDatosUsuario(dni);
         } else {
             System.out.println("Cliente existente (" + dni + ")");
@@ -557,6 +561,7 @@ public class TallerUned {
         System.out.println("Introduce la matrícula:");
         matricula = lector.nextLine();
         if (gestora.getVehiculo(matricula) == null) {
+            System.out.println("Nuevo vehículo");
             pedirDatosCoche(dni, matricula);
         } else {
             System.out.println("Vehículo existente (" + matricula + ")");
@@ -594,13 +599,14 @@ public class TallerUned {
 
     public static void realizarBusquedas() {
 
-        Scanner lector = new Scanner(System.in);
         System.out.println("1.- Buscar vehiculo por matricula.");
         System.out.println("2.- Buscar vehiculo por marca.");
         System.out.println("3.- Buscar por estado ficha.");
         System.out.println("4.- Buscar por tipo de combustible.");
         System.out.println("5.- Buscar vehiculos por cliente");
         int respuesta = lector.nextInt();
+        lector.nextLine();
+
         switch (respuesta) {
             case 1:
                 String matricula;
