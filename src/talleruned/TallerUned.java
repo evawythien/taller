@@ -332,9 +332,9 @@ public class TallerUned {
             aireAcondicionado = lector.nextLine().equalsIgnoreCase("SI");
         }
 
-        Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, marca, dni, numeroRuedas, profesional, dni, tipoCombustible, abs,
-                caballos, cilindrada, almacenamiento, airbag, gps, descapotable, climatizado, numPasajeros, numPuertas,
-                aireAcondicionado, tipoVehiculoPro, tipoMoto);
+        Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, marca, dni, numeroRuedas, profesional, dni,
+                tipoCombustible, abs, caballos, cilindrada, almacenamiento, airbag, gps, descapotable,
+                climatizado, numPasajeros, numPuertas, aireAcondicionado, tipoVehiculoPro, tipoMoto);
 
         gestora.guardarVehiculo(vehiculo);
         gestora.guardarEnXML();
