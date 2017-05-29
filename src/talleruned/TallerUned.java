@@ -31,26 +31,31 @@ public class TallerUned {
             identificador = lector.nextLine();
         } while ((empleado = gestora.getEmpleado(identificador)) == null);
 
-        System.out.println("¿Que quiere hacer?:");
-        System.out.println("1.- Gestión de fichas");
-        System.out.println("2.- Gestión de vehiculos");
-        System.out.println("3.- Gestion de clientes");
-        System.out.println("4.- Búsquedas.");
-        int opcion = lector.nextInt();
+        while (true) {
+            System.out.println("¿Que quiere hacer?:");
+            System.out.println("1.- Gestión de fichas");
+            System.out.println("2.- Gestión de vehiculos");
+            System.out.println("3.- Gestion de clientes");
+            System.out.println("4.- Búsquedas.");
+            int opcion = lector.nextInt();
 
-        switch (opcion) {
-            case 1:
-                gestionFichas();
-                break;
-            case 2:
-                gestionVehiculos();
-                break;
-            case 3:
-                gestionClientes();
-                break;
-            case 4:
-                realizarBusquedas();
-                break;
+            switch (opcion) {
+                case 0:
+                    System.exit(0);
+                    break;
+                case 1:
+                    gestionFichas();
+                    break;
+                case 2:
+                    gestionVehiculos();
+                    break;
+                case 3:
+                    gestionClientes();
+                    break;
+                case 4:
+                    realizarBusquedas();
+                    break;
+            }
         }
     }
 
@@ -531,7 +536,7 @@ public class TallerUned {
         gestora.guardarEnXML();
     }
 
-    public static void pedirDatosFichaReparación(String matricula, String dni, String dniEmpleado) {
+    public static void pedirDatosFichaReparación(String matricula, String dni) {
 
         FichaReparacion ficha = new FichaReparacion();
 
@@ -540,7 +545,7 @@ public class TallerUned {
         ficha.setDniCliente(dni);
         ficha.setEstado(Estado.PENDIENTE); // Al iniciar por defecto el estado es 1 PENDIENTE
         ficha.setMatricula(matricula);
-        ficha.setDniEmpleado(dniEmpleado);
+        ficha.setDniEmpleado(empleado.getDni());
         ficha.setFecha(Utilidades.getFechaActual());
 
         gestora.guardarFichaReparacion(ficha);
