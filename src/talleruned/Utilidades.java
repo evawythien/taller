@@ -36,8 +36,7 @@ public class Utilidades {
         return sdf.format(fecha.getTime());
     }
 
-    public static Boolean isBetweenDates(Calendar fechaInicio, Calendar fechaFin) {
-
+    public static Boolean isPromoBetweenDates(Calendar fechaInicio, Calendar fechaFin) {
         return fechaInicio.after(getFechaActual()) && fechaFin.before(getFechaActual());
     }
 

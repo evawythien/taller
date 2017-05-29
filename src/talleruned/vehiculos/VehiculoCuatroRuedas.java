@@ -47,10 +47,5 @@ public class VehiculoCuatroRuedas extends Vehiculo {
     public void setAireAcondicionado(Boolean aireAcondicionado) {
         this.aireAcondicionado = aireAcondicionado;
     }
-
-    @Override
-    public String toString() {
-        return "VehiculoCuatroRuedas{" + "descapotable=" + descapotable + ", climatizado=" + climatizado + ", numPasajeros=" + numPasajeros + ", numPuertas=" + numPuertas + ", aireAcondicionado=" + aireAcondicionado + '}';
-    }
-
+   
 }
