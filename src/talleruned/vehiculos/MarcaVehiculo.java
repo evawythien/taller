@@ -11,7 +11,7 @@ package talleruned.vehiculos;
  */
 public enum MarcaVehiculo {
 
-    OTRAS(0,"Otras"), AUDI(1, "Audi"), VOLKSWAGEN(2, "Volkseagen"), BMV(3, "Bmv"), SKODA(4, "Skoda"), FIAT(5, "Fiat"), FORD(6, "Ford"), TOYOTA(7, "Toyota"), SUZUKI(8, "Suzuki");
+    OTRAS(0, "Otras"), AUDI(1, "Audi"), VOLKSWAGEN(2, "Volkseagen"), BMV(3, "Bmv"), SKODA(4, "Skoda"), FIAT(5, "Fiat"), FORD(6, "Ford"), TOYOTA(7, "Toyota"), SUZUKI(8, "Suzuki");
 
     private final Integer key;
     private final String value;
@@ -28,10 +28,10 @@ public enum MarcaVehiculo {
     public String getValue() {
         return value;
     }
-    
+
     public static MarcaVehiculo getMarcaByKey(int key) {
-        for (MarcaVehiculo m : MarcaVehiculo.values()){
-            if(m.getKey() == key){
+        for (MarcaVehiculo m : MarcaVehiculo.values()) {
+            if (m.getKey() == key) {
                 return m;
             }
         }

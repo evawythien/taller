@@ -6,7 +6,6 @@ public class Vehiculo {
     private MarcaVehiculo marca;
     private String modelo;
     private int numeroRuedas;
-    private Boolean publico;
     private String dni;
     private TipoCombustible combustible;
     private Boolean ABS;
@@ -46,14 +45,6 @@ public class Vehiculo {
 
     public void setNumeroRuedas(int numeroRuedas) {
         this.numeroRuedas = numeroRuedas;
-    }
-
-    public Boolean getPublico() {
-        return publico;
-    }
-
-    public void setPublico(Boolean publico) {
-        this.publico = publico;
     }
 
     public String getDni() {

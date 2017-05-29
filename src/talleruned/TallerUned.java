@@ -5,9 +5,12 @@ import talleruned.gestionInterna.FichaReparacion;
 import java.util.Scanner;
 import talleruned.usuarios.Cliente;
 import talleruned.usuarios.Empleado;
+import talleruned.vehiculos.FactoriaVehiculos;
 import talleruned.vehiculos.VehiculoCuatroRuedas;
 import talleruned.vehiculos.MarcaVehiculo;
 import talleruned.vehiculos.TipoCombustible;
+import talleruned.vehiculos.TipoMoto;
+import talleruned.vehiculos.TipoVehiculoProfesional;
 import talleruned.vehiculos.Vehiculo;
 import talleruned.vehiculos.VehiculoDosRuedas;
 
@@ -229,16 +232,10 @@ public class TallerUned {
         }
 
         Scanner lector = new Scanner(System.in);
-        Vehiculo vehiculo = null;
 
         System.out.println("¿Cuántas ruedas posee su vehiculo?");
         int numeroRuedas = lector.nextInt();
         lector.nextLine();
-        if (numeroRuedas == 4) {
-            vehiculo = new VehiculoCuatroRuedas();
-        } else if (numeroRuedas == 2) {
-            vehiculo = new VehiculoDosRuedas();
-        }
 
         vehiculo.setDni(dni);
 
@@ -294,6 +291,10 @@ public class TallerUned {
         System.out.println("¿Tiene GPS integrado? - Responde Si o No");
         vehiculo.setGPS(lector.nextLine().equalsIgnoreCase("SI"));
 
+        Vehiculo vehiculo = FactoriaVehiculos.crear(matricula, MarcaVehiculo.OTRAS, dni, numeroRuedas, Boolean.TRUE, dni, TipoCombustible.OTRO, Boolean.FALSE,
+                numeroRuedas, numeroRuedas, numeroRuedas, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, numeroRuedas, numeroRuedas,
+                Boolean.TRUE, Boolean.TRUE, TipoVehiculoProfesional.OTRO, TipoMoto.OTRO)
+        
         gestora.guardarVehiculo(vehiculo);
         gestora.guardarEnXML();
     }

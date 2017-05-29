@@ -20,5 +20,3 @@ public enum Estado {
         return value;
     }
 }
-
-

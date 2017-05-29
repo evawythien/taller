@@ -13,7 +13,7 @@ import talleruned.usuarios.Empleado;
  * @author Eva
  */
 public class TareaEmpleado {
-    
+
     private Tarea tarea;
     private Empleado empleado;
     private Boolean completada;

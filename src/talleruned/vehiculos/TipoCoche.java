@@ -10,5 +10,30 @@ package talleruned.vehiculos;
  * @author Eva
  */
 public enum TipoCoche {
-    TURISMO, DEPORTIVO, TODOTERRENO,  FURGONETAS
+    OTRO(0, "Otro"), TURISMO(1, "Turismo"), DEPORTIVO(2, "Deportivo"), TODOTERRENO(3, "Todoterreno"), FURGONETA(4, "Furgoneta");
+
+    private final Integer key;
+    private final String value;
+
+    TipoCoche(Integer key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public Integer getKey() {
+        return key;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public static TipoCoche getVehiculoProfesionalByKey(int key) {
+        for (TipoCoche t : TipoCoche.values()) {
+            if (t.getKey() == key) {
+                return t;
+            }
+        }
+        return TipoCoche.OTRO;
+    }
 }
