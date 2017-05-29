@@ -34,11 +34,12 @@ public class TallerUned {
 
         while (true) {
             System.out.println("¿Que quiere hacer?:");
+            System.out.println("0.- Salir");
             System.out.println("1.- Gestión de fichas");
             System.out.println("2.- Gestión de vehiculos");
             System.out.println("3.- Gestion de clientes");
-            System.out.println("4.- Búsquedas");
-            System.out.println("5.- Crear fichas");
+            System.out.println("4.- Crear ficha");
+            System.out.println("5.- Búsquedas");
             int opcion = lector.nextInt();
             lector.nextLine();
 
