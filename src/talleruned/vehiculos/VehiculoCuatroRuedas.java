@@ -8,6 +8,10 @@ public class VehiculoCuatroRuedas extends Vehiculo {
     private int numPuertas;
     private Boolean aireAcondicionado;
 
+    public VehiculoCuatroRuedas() {
+        this.setNumeroRuedas(4);
+    }    
+    
     public Boolean getDescapotable() {
         return descapotable;
     }

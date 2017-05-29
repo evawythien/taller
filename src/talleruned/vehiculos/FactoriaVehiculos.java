@@ -1,8 +1,8 @@
 package talleruned.vehiculos;
 
 /**
- *  Una factoría sirve para esconder la implementación y construcción de objetos
- *  de una factoría de clases determinada
+ * Una factoría sirve para esconder la implementación y construcción de objetos
+ * de una factoría de clases determinada
  */
 public class FactoriaVehiculos {
 
@@ -29,6 +29,8 @@ public class FactoriaVehiculos {
             vTemp.setNumPuertas(numPuertas);
             vTemp.setClimatizado(climatizado);
             vTemp.setAireAcondicionado(aireAcondicionado);
+
+            v = vTemp;
 
         } else if (numeroRuedas == 2) {
             v = new VehiculoDosRuedas(tipoMoto);
