@@ -23,7 +23,7 @@
      <float>5.0</float>
     </void>
     <void property="combustible">
-     <object class="java.lang.Enum" method="valueOf">
+     <object class="java.lang.Enum" id="TipoCombustible0" method="valueOf">
       <class>talleruned.vehiculos.TipoCombustible</class>
       <string>DIESEL</string>
      </object>
@@ -32,7 +32,7 @@
      <string>55555F</string>
     </void>
     <void property="marca">
-     <object class="java.lang.Enum" method="valueOf">
+     <object class="java.lang.Enum" id="MarcaVehiculo0" method="valueOf">
       <class>talleruned.vehiculos.MarcaVehiculo</class>
       <string>AUDI</string>
      </object>
@@ -47,7 +47,7 @@
      <int>2</int>
     </void>
     <void property="tipo">
-     <object class="java.lang.Enum" method="valueOf">
+     <object class="java.lang.Enum" id="TipoMoto0" method="valueOf">
       <class>talleruned.vehiculos.TipoMoto</class>
       <string>CARRETERA</string>
      </object>
@@ -95,6 +95,50 @@
     </void>
     <void property="modelo">
      <string></string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>5555F</string>
+   <object class="talleruned.vehiculos.VehiculoDosRuedas">
+    <void property="ABS">
+     <boolean>true</boolean>
+    </void>
+    <void property="GPS">
+     <boolean>true</boolean>
+    </void>
+    <void property="airbag">
+     <boolean>true</boolean>
+    </void>
+    <void property="almacenamiento">
+     <float>2.0</float>
+    </void>
+    <void property="caballos">
+     <float>2.0</float>
+    </void>
+    <void property="cilindrada">
+     <float>2.0</float>
+    </void>
+    <void property="combustible">
+     <object idref="TipoCombustible0"/>
+    </void>
+    <void property="dni">
+     <string>55555F</string>
+    </void>
+    <void property="marca">
+     <object idref="MarcaVehiculo0"/>
+    </void>
+    <void property="matricula">
+     <string>5555F</string>
+    </void>
+    <void property="modelo">
+     <string>asdf</string>
+    </void>
+    <void property="numeroRuedas">
+     <int>2</int>
+    </void>
+    <void property="tipo">
+     <object idref="TipoMoto0"/>
     </void>
    </object>
   </void>

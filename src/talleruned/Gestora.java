@@ -1,6 +1,7 @@
 package talleruned;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import talleruned.gestionInterna.FichaReparacion;
 import java.util.Collections;
 import java.util.Date;
@@ -22,8 +23,6 @@ public class Gestora {
     private HashMap<Integer, FichaReparacion> fichas;
     private HashMap<String, Empleado> empleados;
     private HashMap<Integer, Promocion> promociones;
-    private HashMap<Integer, Mensaje> mensajes;
-    private HashMap<Integer, Tarea> tareas;
     private int idUltimaFicha;
 
     public Gestora() {
@@ -33,23 +32,15 @@ public class Gestora {
         this.fichas = new HashMap<>();
         this.empleados = new HashMap<>();
         this.promociones = new HashMap<>();
-        this.tareas = new HashMap<>();
-        this.mensajes = new HashMap<>();
         this.empleados.put("1234", new Empleado("mecanico", "Paco", "Garcia", "Garcia", "1234", "Calle de abajo", 983666555, 633552244, Utilidades.getFecha(12, 12, 1960)));
         this.empleados.put("9876", new Empleado("mecanico", "Pepe", "Perez", "Perez", "9876", "Calle de arriba", 983666555, 633552244, Utilidades.getFecha(1, 1, 1989)));
-        
-        this.promociones.put(1, new Promocion(1, 9, "Puesta a punto periodo Semana Santa", Utilidades.getFecha(1, 4, 2017), Utilidades.getFecha(30, 4, 2017), 100.f));
-        this.promociones.put(2, new Promocion(2, 9, "Puesta a punto periodo Verano", Utilidades.getFecha(1, 2, 2017), Utilidades.getFecha(30, 9, 2017), 90.f));
-        this.promociones.put(3, new Promocion(3, 9, "Puesta a punto periodo Navidad", Utilidades.getFecha(1, 12, 2017), Utilidades.getFecha(5, 1, 2018), 110.f));
-        this.promociones.put(4, new Promocion(4, 10, "Promoción cambio de neumaticos", Utilidades.getFecha(1, 2, 2017), Utilidades.getFecha(31, 3, 2017), 400.f));
-        this.promociones.put(5, new Promocion(5, 1, "Promoción cambio de filtro", Utilidades.getFecha(1, 10, 2017), Utilidades.getFecha(31, 10, 2017), 150.f));
-        this.promociones.put(6, new Promocion(6, 4, "Promoción cambio de aceite", Utilidades.getFecha(1, 11, 2017), Utilidades.getFecha(30, 11, 2017), 20.f));
-        this.mensajes.put(1, new Mensaje(1, 1, "¿Le gustaría aceptar a la promoción actual de 'Puesta a punto periodo Semana Santa'?"));
-        this.mensajes.put(2, new Mensaje(2, 2, "¿Le gustaría aceptar a la promoción actual de 'Puesta a punto periodo Verano'?"));
-        this.mensajes.put(3, new Mensaje(3, 3, "¿Le gustaría aceptar a la promoción actual de 'Puesta a punto periodo Navidad'?"));
-        this.mensajes.put(4, new Mensaje(4, 4, "¿Le gustaría aceptar a la promoción actual de 'Promoción cambio de neumaticos'?"));
-        this.mensajes.put(5, new Mensaje(5, 5, "¿Le gustaría aceptar a la promoción actual de 'Promoción cambio de filtro'?"));
-        this.mensajes.put(6, new Mensaje(6, 6, "¿Le gustaría aceptar a la promoción actual de 'Promoción cambio de aceite'?"));
+
+        this.promociones.put(1, new Promocion(1, "Puesta a punto periodo Semana Santa", Utilidades.getFecha(1, 4, 2017), Utilidades.getFecha(30, 4, 2017), 100.f));
+        this.promociones.put(2, new Promocion(2, "Puesta a punto periodo Verano", Utilidades.getFecha(1, 2, 2017), Utilidades.getFecha(30, 9, 2017), 90.f));
+        this.promociones.put(3, new Promocion(3, "Puesta a punto periodo Navidad", Utilidades.getFecha(1, 12, 2017), Utilidades.getFecha(5, 1, 2018), 110.f));
+        this.promociones.put(4, new Promocion(4, "Promoción cambio de neumaticos", Utilidades.getFecha(1, 2, 2017), Utilidades.getFecha(31, 3, 2017), 400.f, Tarea.CAMBIO_NEUMATICOS));
+        this.promociones.put(5, new Promocion(5, "Promoción cambio de filtro", Utilidades.getFecha(1, 1, 2017), Utilidades.getFecha(31, 10, 2017), 150.f, Tarea.FITRO_PARTICULAS));
+        this.promociones.put(6, new Promocion(6, "Promoción cambio de aceite", Utilidades.getFecha(1, 1, 2017), Utilidades.getFecha(30, 11, 2017), 20.f, Tarea.REVISION_ACEITE));
 
     }
 
@@ -203,6 +194,41 @@ public class Gestora {
             }
         }
         return sb.toString();
+    }
+
+    public List<Promocion> getPromocionesValidas(int idTarea) {
+        List<Promocion> promo = new ArrayList<>();
+        for (Promocion promocion : promociones.values()) {
+            if (promocion.esPromocionValida(idTarea, Utilidades.getFechaActual())) {
+                promo.add(promocion);
+            }
+        }
+        return promo;
+    }
+
+    public List<Promocion> getPromocionesValidas(int idTarea, String dni, int idFichaIgnorar) {
+        List<Promocion> promo = new ArrayList<>();
+        for (Promocion promocion : promociones.values()) {
+            if (promocion.esPromocionValida(idTarea, Utilidades.getFechaActual()) && !promocionEnTarea(dni, promocion.getIdPromocion(), idTarea)) {
+                promo.add(promocion);
+            }
+        }
+        return promo;
+    }
+
+    public Boolean promocionEnTarea(String dni, int idPromocion, int idFicha) {
+
+        for (FichaReparacion f : fichas.values()) {
+            return f.getDniCliente().equals(dni) && f.getIdFicha() != idFicha
+                    && (f.getFecha().before(Utilidades.getFechaHaceUnAnno())
+                    || f.getPromocion() != idPromocion);
+        }
+
+        return false;
+    }
+
+    public Promocion getPromocion(int id) {
+        return promociones.get(id);
     }
 
 }

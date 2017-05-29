@@ -1,5 +1,6 @@
 package talleruned;
 
+import java.util.List;
 import talleruned.gestionInterna.FichaReparacion;
 import java.util.Scanner;
 import talleruned.gestionInterna.Estado;
@@ -57,10 +58,10 @@ public class TallerUned {
                     gestionClientes();
                     break;
                 case 4:
-                    realizarBusquedas();
+                    pedirDatosFichaReparación();
                     break;
                 case 5:
-                    pedirDatosFichaReparación();
+                    realizarBusquedas();
                     break;
             }
         }
@@ -578,8 +579,20 @@ public class TallerUned {
         for (Tarea t : Tarea.values()) {
             System.out.println(t.getIdTarea() + ".- " + t.getNombre() + " (" + t.getCoste() + ")");
         }
-        ficha.setTarea(Tarea.getTareaByKey(lector.nextInt()));
+        ficha.setTarea(Tarea.getTareaByKey(lector.nextInt()).getIdTarea());
         lector.nextLine();
+
+        List<Promocion> promosAplicables = gestora.getPromocionesValidas(ficha.getTarea());
+
+        if (!promosAplicables.isEmpty()) {
+
+            System.out.println("¿Que promoción desea aplicar? - Seleccione un número");
+            for (Promocion p : promosAplicables) {
+                System.out.println(p.getIdPromocion() + ".- " + p.getDescripcion() + " (" + p.getPrecio() + ")");
+            }
+            ficha.setPromocion(gestora.getPromocion(lector.nextInt()).getIdPromocion());
+            lector.nextLine();
+        }
 
         ficha.setDniCliente(dni);
         ficha.setEstado(Estado.PENDIENTE); // Al iniciar por defecto el estado es 1 PENDIENTE
@@ -612,21 +625,34 @@ public class TallerUned {
             ficha.setComentario(temp);
         }
 
-        System.out.println("¿Que tarea? - Seleccione un número [" + ficha.getTarea().getIdTarea() + "]");
+        System.out.println("¿Que tarea? - Seleccione un número [" + ficha.getTarea() + "]");
         for (Tarea t : Tarea.values()) {
             System.out.println(t.getIdTarea() + ".- " + t.getNombre() + " (" + t.getCoste() + ")");
         }
         temp = lector.nextLine();
         if (!"".equals(temp)) {
-            ficha.setTarea(Tarea.getTareaByKey(Integer.parseInt(temp)));
+            ficha.setTarea(Tarea.getTareaByKey(Integer.parseInt(temp)).getIdTarea());
         }
 
         System.out.println("¿Estado? - Seleccione un número [" + ficha.getEstado().getKey() + ".- " + ficha.getEstado().getValue() + "]");
         for (Estado estado : Estado.values()) {
             System.out.println(estado.getKey() + ".- " + estado.getValue());
         }
-        ficha.setEstado(Estado.getEstadoByKey(lector.nextInt()));
-        lector.nextLine();
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            ficha.setEstado(Estado.getEstadoByKey(Integer.parseInt(temp)));
+        }
+
+        List<Promocion> promosAplicables = gestora.getPromocionesValidas(ficha.getTarea(), ficha.getDniCliente(), ficha.getIdFicha());
+
+        System.out.println("¿Que promoción desea aplicar? - Seleccione un número");
+        for (Promocion p : promosAplicables) {
+            System.out.println(p.getIdPromocion() + ".- " + p.getDescripcion() + " (" + p.getPrecio() + ")");
+        }
+        temp = lector.nextLine();
+        if (!"".equals(temp)) {
+            ficha.setPromocion(gestora.getPromocion(Integer.parseInt(temp)).getIdPromocion());
+        }
     }
 
     public static String getDniExistente() {

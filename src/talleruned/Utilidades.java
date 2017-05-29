@@ -16,6 +16,12 @@ public class Utilidades {
         return calendar;
     }
 
+    public static Calendar getFechaHaceUnAnno() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1);
+        return calendar;
+    }
+
     public static Calendar getFecha(int dia, int mes, int año) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(año, mes, dia);

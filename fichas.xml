@@ -68,5 +68,43 @@
     </void>
    </object>
   </void>
+  <void method="put">
+   <int>3</int>
+   <object class="talleruned.gestionInterna.FichaReparacion">
+    <void property="comentario">
+     <string>Paco</string>
+    </void>
+    <void property="dniCliente">
+     <string>55555F</string>
+    </void>
+    <void property="dniEmpleado">
+     <string>1234</string>
+    </void>
+    <void property="estado">
+     <object idref="Estado0"/>
+    </void>
+    <void property="fecha">
+     <object class="java.util.GregorianCalendar">
+      <void property="time">
+       <object class="java.util.Date">
+        <long>1496094648964</long>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="idFicha">
+     <int>3</int>
+    </void>
+    <void property="matricula">
+     <string>5555FFF</string>
+    </void>
+    <void property="promocion">
+     <int>6</int>
+    </void>
+    <void property="tarea">
+     <int>4</int>
+    </void>
+   </object>
+  </void>
  </object>
 </java>
